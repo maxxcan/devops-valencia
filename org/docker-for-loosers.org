@@ -1,0 +1,148 @@
+
+#+TITLE: Introducción a docker
+#+AUTHOR: Patricio Martínez
+
+
+* Introducción
+
+[[./images/docker_logo.png]]
+
+
+Docker es un proyecto de código abierto que automatiza el despliegue de aplicaciones dentro de contenedores de software, proporcionando una capa adicional de abstracción y automatización de Virtualización a nivel de sistema operativo en Linux.2​ Docker utiliza 
+características de aislamiento de recursos del kernel Linux, tales como cgroups y espacios de nombres (namespaces) para permitir que "contenedores" independientes se ejecuten dentro de una sola instancia de Linux, evitando la sobrecarga de iniciar y mantener máquinas virtuales.3​
+
+El soporte del kernel Linux para los espacios de nombres4​ aísla la vista que tiene una aplicación de su entorno operativo, incluyendo árboles de proceso, red, ID de usuario y sistemas de archivos montados, mientras que los cgroups del kernel proporcionan aislamiento de recursos, incluyendo la CPU, la memoria, el bloque de E / S y de la red. Desde la versión 0.9, Docker incluye la biblioteca libcontainer como su propia manera de utilizar directamente las facilidades de virtualización que ofrece el kernel Linux, además de utilizar las interfaces abstraídas de virtualización mediante libvirt, LXC (Linux Containers) y systemd-nspawn.5​6​7​
+
+De acuerdo con la firma analista de la industria 451 Research, "Docker es una herramienta que puede empaquetar una aplicación y sus dependencias en un contenedor virtual que se puede ejecutar en cualquier servidor Linux. Esto ayuda a permitir la flexibilidad y portabilidad en donde la aplicación se puede ejecutar, ya sea en las instalaciones físicas, la nube pública, nube privada, etc.8​
+
+En resumen:
+
+[[./images/docker.png]]
+
+
+* Instalar docker
+
+En ArchLinux haremos 
+
+#+begin_src sh
+yaourt -S docker
+#+end_src
+
+A continuación vamos a iniciar el demonio y habilitarlo en el arranque
+
+#+begin_src sh 
+sudo systemctl start docker
+sudo systemctl enable docker
+#+end_src 
+
+* Pasos básicos
+
+** Instalar un docker
+
+Ejemplo de instalar un busybox
+
+#+begin_src sh :exports code :results code :tangle yes 
+docker pull busybox
+#+end_src 
+
+#+RESULTS:
+#+BEGIN_SRC sh
+Using default tag: latest
+latest: Pulling from library/busybox
+Digest: sha256:141c253bc4c3fd0a201d32dc1f493bcf3fff003b6df416dea4f41046e0f37d47
+Status: Image is up to date for busybox:latest
+#+END_SRC
+
+
+Usamos sudo por temas de servicio pero lo ideal es crear un grupo y añadir nuestro usuario a ese grupo.
+
+#+begin_src sh
+sudo groupadd docker
+sudo usermod -aG docker $USER
+#+end_src
+
+** Ejecutando docker
+
+#+BEGIN_SRC sh 
+docker run busybox
+#+END_SRC
+
+Nuestro docker está ahora funcionando
+
+Para verlo ejecutamos:
+
+#+begin_src sh
+docker ps
+#+end_src
+
+No aparece nada porque no está corriendo así que ejecutamos
+
+#+begin_src sh
+docker ps -a
+#+end_src
+
+Ahora vamos a ejecutar
+
+#+begin_src sh
+docker run -it busybox sh
+#+end_src
+
+Con la etiqueta *it* lo que hacemos es activar la interactividad con la terminal tty
+
+** Borrando un contenedor
+
+
+Para borrar la imagen ejecutaremos lo siguiente
+
+#+begin_src sh
+docker rm ID del contenedor
+#+end_src 
+
+Para facilitar esto podemos borrar los contenedores de los cuales su estado sea /exited/ 
+
+#+BEGIN_SRC sh
+docker rmi $(docker ps -a -q -f status=exited)
+#+END_SRC
+
+
+** Borrando imágenes 
+
+Para borrar la imagen veremos cual es su id y lo borraremos con la opción rmi
+
+#+begin_src sh 
+docker images
+docker rmi id-imagen
+#+end_src
+
+* Ejemplo de aplicación Web con Docker
+
+Vamos a ejecutar el siguiente comando
+
+sudo docker run prakhar1989/static-site
+
+Con esto a la vez descargamos y ejecutamos la imagen de docker.
+
+En este caso el cliente no expone sus puertos. Para hacer esto volveremos a ejecutar *docker run*. Al mismo tiempo
+haremos que nuestra terminal no se quede anclada ejecutando el contenedor. Esto es llamado modo *detached*
+
+#+begin_src sh :exports code :results code :tangle yes 
+docker run -d -P --name static-site prakhar1989/static-file
+#+end_src
+
+#+RESULTS:
+#+BEGIN_SRC sh
+#+END_SRC
+
+La opción -d hace el desanclaje de nuesta terminal, -P public todos los puertos de forma aleatoria y finalmente --name le da un nombre
+a nuestro contenedor. Ahora podremos ver los puertos con la siguiente orden:
+
+#+begin_src sh
+docker port static-site
+#+end_src
+
+También podemos especificar los puertos con:
+
+#+begin_src sh
+docker run -p 8888:80 prakhar1989/static-site
+#+end_src 
+

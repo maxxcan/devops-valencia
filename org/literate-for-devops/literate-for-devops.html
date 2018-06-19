@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Programación Literaria para Devops</title>
+<meta name="author" content="(Patricio Martínez)"/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="file:/opt/reveal.js/css/reveal.css"/>
+
+<link rel="stylesheet" href="file:/opt/reveal.js/css/theme/league.css" id="theme"/>
+
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'file:/opt/reveal.js/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1 class="title">Programación Literaria para Devops</h1><h2 class="author">Patricio Martínez</h2><p class="date">Created: 2017-04-05 mié 18:40</p>
+</section>
+<section id="table-of-contents">
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#/slide-org4289848">Introducción</a></li>
+<li><a href="#/slide-org54965c0">Qué es un Devops</a></li>
+<li><a href="#/slide-orgba29594">La documentación es muy importante</a></li>
+<li><a href="#/slide-org1aa1542">Dos conceptos interesantes que importamos de la ciencia y la computación</a></li>
+<li><a href="#/slide-org841921a">Programación literaria para Devops</a></li>
+<li><a href="#/slide-org578e996">Aplicaciones</a></li>
+<li><a href="#/slide-org21102e5">Demostración</a></li>
+<li><a href="#/slide-org1c39362">Para saber más</a></li>
+<li><a href="#/slide-orgac0509a">Gracias a todos</a></li>
+</ul>
+</div>
+</div>
+</section>
+
+
+
+<section>
+<section id="slide-org4289848">
+<h2 id="org4289848">Introducción</h2>
+<p>
+Esta es una charla muy corta. La más corta y floja de la temporada. 
+</p>
+
+<p>
+Esta charla viene de cuando nos reuniamos en la universidad por la tarde para tomar un café
+y hablar sobre conceptos, herramientas, ideas, etc. 
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-org0370739" data-background="./img/cafe.gif" data-background-transition="slide">
+<h3 id="org0370739">Café con Patricio</h3>
+<p>
+Así que relajémonos y tomemos un café juntos mientras charlamos 
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-org5797731" data-background="#ff0000" data-background-transition="zoom">
+<h3 id="org5797731">&#x2014; WARNING</h3>
+<p>
+Esto es muy <b>Novedoso</b>. 
+</p>
+
+<p>
+<b>Esto quiere decir que posiblemente en vuestras empresas o lo implementáis vosotros o nadie lo hará</b>
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-org54965c0">
+<h2 id="org54965c0">Qué es un Devops</h2>
+
+<div class="figure">
+<p><img src="./img/devops.jpg" alt="devops.jpg" />
+</p>
+</div>
+
+
+</section>
+<section >
+
+<p>
+Pero lo principal es saber que <b>Devops</b> no es un puesto es un <b>método</b> o <b>cultura</b>
+</p>
+
+
+<div class="figure">
+<p><img src="./img/metodo-devops.jpg" alt="metodo-devops.jpg" />
+</p>
+</div>
+
+
+</section>
+<section >
+
+<p>
+<span class="underline">Algunas</span> de sus fases de su trabajo:
+</p>
+
+<ul>
+<li class="fragment appear">Integración continua</li>
+<li class="fragment appear">Continuo desarrollo</li>
+<li class="fragment appear">Desarrollo Ágil</li>
+<li class="fragment appear"><span class="underline">Documentación y Comunicación_</span> &lt;&#x2014;</li>
+
+</ul>
+
+
+
+
+
+</section>
+</section>
+<section>
+<section id="slide-orgba29594">
+<h2 id="orgba29594">La documentación es muy importante</h2>
+
+<div class="figure">
+<p><img src="./img/ordenador-troll.gif" alt="ordenador-troll.gif" />
+</p>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org2767da6">
+<h3 id="org2767da6">Posibles problemas por no tener una documentación adecuada</h3>
+<div class="outline-text-3" id="text-org2767da6">
+</div></section>
+<section id="slide-orgf069bbe">
+<h4 id="orgf069bbe">El trabajo del administrador se hace tedioso y confuso</h4>
+
+<div class="figure">
+<p><img src="./img/admin-confuso.jpg" alt="admin-confuso.jpg" />
+</p>
+</div>
+
+
+</section>
+<section id="slide-org33da10c">
+<h4 id="org33da10c">Dificulta la resolución de problemas</h4>
+<p>
+&#x2013; Que siempre ocurren los viernes por la tarde
+</p>
+
+
+<div class="figure">
+<p><img src="./img/rogando.jpg" alt="rogando.jpg" />
+</p>
+</div>
+
+
+</section>
+<section id="slide-org488f727">
+<h4 id="org488f727">Dificulta el trabajo a otras personas que vengan nuevas</h4>
+
+<div class="figure">
+<p><img src="./img/newbie-sysadmin.png" alt="newbie-sysadmin.png" />
+</p>
+</div>
+
+</section>
+<section id="slide-orga244e9d">
+<h4 id="orga244e9d">Problemas con la gestión de claves y permisos</h4>
+
+<div class="figure">
+<p><img src="./img/usuario-invalido.jpg" alt="usuario-invalido.jpg" />
+</p>
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org1aa1542">
+<h2 id="org1aa1542">Dos conceptos interesantes que importamos de la ciencia y la computación</h2>
+<ul>
+<li class="fragment appear">Programación Literaria</li>
+<li class="fragment appear">Investigación reproducible</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org47132e9">
+<h3 id="org47132e9">Qué es la programación literaria o letrada</h3>
+<p>
+Es un estilo de programación propuesto por <b>Donald Knuth</b> para documentar los programas. 
+Este estilo de programación representa un movimiento disruptivo respeto a la escritura de
+programas en el orden y forma impuesto por el ordenador. En cambio permite a los programadores
+desarrollar sus programas en el orden fijado por la lógica y el flujo de sus pensamientos.
+</p>
+
+</section>
+<section >
+
+
+<div class="figure">
+<p><img src="./img/donald-knuths.jpg" alt="donald-knuths.jpg" />
+</p>
+</div>
+
+<p>
+Donald Knuths creador de <b>Latex</b>
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-orgefe7e01">
+<h3 id="orgefe7e01">Qué es la investigación reproducible</h3>
+<p>
+La reproducibilidad ha sido una parte clave de la investigación científica y se ha
+denominado la <b>demarcación entre ciencia y nociencia</b>. <i>Cristopher Gandrud</i>
+</p>
+
+<p>
+La investigación reproducible requiere que los conjuntos de datos y el código computacional 
+estén disponibles para la verificación de los resultados publicados y la realización de análisis alternativos
+</p>
+
+</section>
+<section id="slide-org82e9a43">
+<h4 id="org82e9a43">Ventajas para un Devops</h4>
+<ul>
+<li class="fragment appear">Mayor velocidad a la hora de repetir un proceso</li>
+<li class="fragment appear">Capacidad de analizar un proceso y mejorarlo</li>
+<li class="fragment appear">Mejora la documentación y la revisión de la misma</li>
+<li class="fragment appear">Mejora la comunicación entre devops o equipos</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org841921a">
+<h2 id="org841921a">Programación literaria para Devops</h2>
+<p>
+Posible definición:
+</p>
+
+<p>
+<b>La manera de escribir, explicar, documentar y ejecutar infraestructuras como código.</b>
+</p>
+
+
+</section>
+</section>
+<section>
+<section id="slide-orga515944">
+<h3 id="orga515944">Diferencia entre programación literaria y código con comentarios.</h3>
+
+<div class="figure">
+<p><img src="./img/diferencias.png" alt="diferencias.png" />
+</p>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org578e996">
+<h2 id="org578e996">Aplicaciones</h2>
+<div class="outline-text-2" id="text-org578e996">
+</div></section>
+</section>
+<section>
+<section id="slide-org9a0b57c">
+<h3 id="org9a0b57c">Algunas programas</h3>
+<p>
+Aunque aún no es muy popular este tipo de desarrollo cada vez hay más programas y extensiones para
+conocidos editores aunque están más enfocados a la programación literaria. 
+</p>
+
+<p>
+Algunos de estos son:
+</p>
+
+<ul>
+<li class="fragment appear"><a href="http://leoeditor.com/">Editor Leo</a></li>
+<li class="fragment appear"><a href="https://github.com/nteract/nteract">Editor nteract</a></li>
+<li class="fragment appear"><a href="http://lep.sourceforge.net/">Extensión para Eclipse</a></li>
+<li class="fragment appear"><a href="https://atom.io/packages/language-literate">Extensión para Atom</a></li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org77b63c4">
+<h3 id="org77b63c4">Emacs. El editor definitivo para Devops</h3>
+<p>
+<b>Emacs es el editor extensible</b>
+</p>
+
+
+<div class="figure">
+<p><img src="./img/emacs.png" alt="emacs.png" />
+</p>
+</div>
+
+<p>
+<a href="https://www.gnu.org/software/emacs/">Su página web</a>
+</p>
+
+</section>
+<section >
+
+<ul>
+<li class="fragment appear">Puedes <b>modificar</b> cada aspecto del editor</li>
+<li class="fragment appear">Puedes añadirle todas la <b>funcionalidades</b> que quieras</li>
+<li class="fragment appear">Opera con <b>modos</b>. Cada modo le da un conjunto de nuevas funcionalidades.</li>
+
+</ul>
+<ul>
+<li class="fragment appear">Modos para programación en Python, C/C++, Java, TypeScript, etc.</li>
+<li class="fragment appear">Modos para chatear, correo, navegador web, gestor de git e incluso un reproductor de música.</li>
+<li class="fragment appear">Modos para generar gran cantidad de formatos de documentos en PDF, HTML, presentaciones, etc.</li>
+
+</ul>
+
+</section>
+<section >
+
+<ul>
+<li class="fragment appear">Tiene una completa <b>integración</b> con el sistema operativo.
+<ul>
+<li>Esto habilita la capacidad de <b>ejecutar comandos del sistema</b> y capturar su salida.</li>
+
+</ul></li>
+<li class="fragment appear">Además es más liviano que la mayoría de IDEs del mercado.</li>
+<li class="fragment appear">Gran cantidad de paquetes con los que la comunidad continuamente añade mejoras</li>
+<li class="fragment appear">Puede funcionar perfectamente en <b>modo texto</b></li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-org77dde13">
+<h3 id="org77dde13">Org-mode</h3>
+<p>
+Un modo muy especial de Emacs.
+Es una perla dentro de Emacs. Mucha gente se ha pasado
+a Emacs sólo por este modo. 
+</p>
+
+<p>
+<b>Org mode</b> sirve para tomar notas, hacer listas de tareas, planificar proyectos, generar
+documentación, hacer presentaciones y charlas, etc, y todo en un efectivo sistema en <span class="underline">texto
+plano</span>
+</p>
+</section>
+<section >
+<ul>
+<li class="fragment appear">Org-mode es así mismo muy extensible</li>
+<li class="fragment appear">Ayuda a organizar los documentos</li>
+<li class="fragment appear">Es un gran gestor de tareas</li>
+<li class="fragment appear">Los ficheros son muy livianos al ser texto plano</li>
+<li class="fragment appear">Puedes embeber código, tablas, imágenes, Latex etc, puede reemplazar a cualquier procesador de texto</li>
+<li class="fragment appear">Ejecuta código y muestra los resultados</li>
+<li class="fragment appear">Exporta a gran cantidad de formatos como PDF, HTML, ascii, etc.</li>
+<li class="fragment appear">También se integra con distinto software de gestión de procesos como <a href="https://es.atlassian.com/software/jira">Jira</a>, <a href="http://www.redmine.org/">Redmine</a> y otros.</li>
+
+</ul>
+</section>
+</section>
+<section>
+<section id="slide-org21102e5">
+<h2 id="org21102e5">Demostración</h2>
+</section>
+</section>
+<section>
+<section id="slide-org1c39362">
+<h2 id="org1c39362">Para saber más</h2>
+<ul>
+<li class="fragment appear"><a href="http://www.howardism.org/">Howard Abrams</a></li>
+<li class="fragment appear"><a href="http://www-cs-faculty.stanford.edu/~uno/lp.html">Donald Knuth</a></li>
+<li class="fragment appear"><a href="https://staff.science.uva.nl/c.dominik/">Carsten Dominik</a></li>
+
+</ul>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org775e129">
+<h3 id="org775e129">Webs</h3>
+<p>
+Buscar por <i>literate devops</i>
+</p>
+
+<p>
+Algunos ejemplos son:
+</p>
+<ul>
+<li class="fragment appear"><a href="http://www.howardism.org/Technical/Emacs/literate-devops.html">Artículo de Howard Abrams</a></li>
+<li class="fragment appear"><a href="http://www.howardism.org/Technical/Emacs/literate-database.html">Otro artículo para acceder a una base de datos</a></li>
+<li class="fragment appear"><a href="https://archive.fosdem.org/2016/schedule/event/literate_devops_for_configuration_management/">Charla en el FOSDEM del 2016</a></li>
+
+</ul>
+
+</section>
+<section >
+
+<p>
+Finalmente hay mucha información en las planets de Emacs
+</p>
+<ul>
+<li class="fragment appear"><a href="http://planet.emacsen.org/">Planet de Emacs en inglés</a></li>
+<li class="fragment appear"><a href="http://planet.emacs-es.org/">Planet de Emacs en español</a></li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org9dae7e6">
+<h3 id="org9dae7e6">Vídeos</h3>
+<ul>
+<li class="fragment appear"><a href="https://www.youtube.com/watch?v=dljNabciEGg">Vídeo de Howard Abrams</a></li>
+<li class="fragment appear"><a href="https://www.youtube.com/watch?v=vVJSn8gCh_I">Otro vídeo de Howard Abrams</a></li>
+<li class="fragment appear">Vídeo de Devops Murcia??</li>
+
+</ul>
+
+
+</section>
+</section>
+<section>
+<section id="slide-orgac0509a">
+<h2 id="orgac0509a">Gracias a todos</h2>
+<p>
+Sólo a vosotros os puedo contar mis traumas. 
+</p>
+
+<p>
+Sois mejores que un psicólogo :-)
+</p>
+</section>
+</section>
+</div>
+</div>
+<script src="file:/opt/reveal.js/lib/js/head.min.js"></script>
+<script src="file:/opt/reveal.js/js/reveal.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: false,
+center: true,
+slideNumber: 'c',
+rollingLinks: true,
+keyboard: true,
+overview: true,
+width: 1200,
+height: 800,
+margin: 0.10,
+minScale: 0.50,
+maxScale: 2.50,
+
+theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+transition: Reveal.getQueryHash().transition || 'cube', // default/cube/page/concave/zoom/linear/fade/none
+transitionSpeed: 'default',
+multiplex: {
+    secret: '', // null if client
+    id: '', // id, obtained from socket.io server
+    url: '' // Location of socket.io server
+},
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+ { src: 'file:/opt/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+ { src: 'file:/opt/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'file:/opt/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'file:/opt/reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: 'file:/opt/reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }]
+});
+</script>
+</body>
+</html>

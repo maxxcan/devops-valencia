@@ -1,0 +1,140 @@
+#+TITLE: Qué es un Devops
+#+AUTHOR: Patricio Martínez
+#+EMAIL: maxxcan@gmail.com
+#+REVEAL_ROOT: file:/opt/reveal.js/
+#+OPTIONS: reveal_center:t reveal_progress:t reveal_history:nil reveal_control:t multiplex:t
+#+OPTIONS: reveal_rolling_links:t reveal_keyboard:t reveal_overview:t num:nil
+#+OPTIONS: reveal_width:1200 reveal_height:800
+#+OPTIONS: toc:1
+#+REVEAL_MARGIN: 0.1
+#+REVEAL_MIN_SCALE: 0.5
+#+REVEAL_MAX_SCALE: 2.5
+#+REVEAL_TRANS: cube
+#+REVEAL_THEME: league
+#+REVEAL_HLEVEL: 2
+
+
+ 
+* Introducción
+
+Ahora tomemos un descanso de unos días.
+
+Esta charla viene de cuando nos reuniamos en la universidad por la tarde para tomar un café
+y hablar sobre conceptos, herramientas, ideas, etc. 
+
+** Café con Patricio
+:PROPERTIES:
+:reveal_background: ./images/cafe.gif
+:reveal_background_trans: slide
+:END: 
+
+Así que relajémonos y tomemos un café juntos mientras charlamos 
+
+
+* Qué es un Devops
+
+
+DevOps es un término relativamente nuevo para describir lo que también ha sido llamado como *“administración ágil de sistemas”* y también el trabajo y colaboración en conjunto de los equipos de operaciones y de desarrollo.
+
+Puedes pensar en DevOps como la participación efectiva de los administradores de sistemas en el proceso de desarrollo de aplicaciones, utilizando las mismas *técnicas ágiles* que usan los desarrolladores.
+
+#+reveal: split
+
+DevOps significa un montón de cosas diferentes para diferentes personas porque el “desarrollo ágil” en si mismo cubre un terreno bastante amplio. 
+
+Algunas personas dirán que DevOps 
+es “ *la colaboración de los departamentos de desarrollo y operaciones* ”, o que es “ *tratar tu código como infraestructura* ”, o “ *usar automatización* ”.
+similares que se relacionan de una u otra forma.
+
+#+reveal: split
+
+
+[[./images/devops.jpg]]
+
+
+#+reveal: split 
+
+Pero lo principal es saber que *Devops* no es un puesto es un *método* o *cultura*
+
+[[./images/metodo-devops.jpg]]
+
+** Puntos resumen sobre qué es DevOps
+
+Los grandes puntos u objetivos que persigue la metodología de trabajo DevOps podría resumirse en los siguientes puntos:
+
+#+attr_reveal: :frag (appear)
++ *Tiene como objetivo en cerrar una brecha entre el personal de operaciones y desarrollo* mediante la mejorar de la comunicación, la colaboración y la integración.
+
++ *Mejorar y optimización de los procesos* de puesta en marcha de un software.
+
++ *Permitir una mayor agilidad y excelencia operativa* para responder a una exigencia en la calidad y la rapidez de entrega.
+
++ *Simplificar los procesos de despliegue* de software e implementación sin renunciar a la efectividad y competitividad de una empresa.
+
+#+reveal: split
+
+[[./images/dev-ops.jpg]]
+
+** Algunas de sus fases de su trabajo:
+
+#+attr_reveal: :frag (appear)
++ Integración continua
++ Continuo desarrollo
++ Desarrollo Ágil
++ Documentación y Comunicación
+
+#+reveal: split 
+
+[[./images/procesos-en-DevOps.png]]
+
+
+* Prácticas Devops 
+
+#+attr_reveal: :frag (appear)
+
++ *Principios DevOps*   Como debemos pensar diferentes sobre operaciones. Ejemplos incluyen la colaboración entre administradores y desarrolladores, “infraestructura como código”, etc.
+
++ *Métodos DevOps*  Procesos que se usan para realizar operaciones ágiles, como iteraciones, lean/kanban, reuniones de 5 minutos, etc.
+
++ *Prácticas DevOps*  Técnicas y herramientas específicas usadas como parte de la implementación de los procesos, como herramientas de automatización (Puppet, Cheft), continuous deployment, sistemas de monitoreo (Nagios, Zabbix), y cualquier aplicación que tengas en tu “caja de herramientas”.
+
+
+* Las herramientas del Devops 
+
+[[./images/devops-tools.png]]
+
+
+* La documentación es muy importante
+
+[[./images/ordenador-troll.gif]]
+
+** Posibles problemas por no tener una documentación adecuada
+
+*** El trabajo del administrador se hace tedioso y confuso
+
+[[./images/admin-confuso.jpg]]
+
+
+*** Dificulta la resolución de problemas 
+
+-- Que siempre ocurren los viernes por la tarde
+
+[[./images/rogando.jpg]]
+
+
+*** Dificulta el trabajo a otras personas que vengan nuevas
+
+[[./images/newbie-sysadmin.png]]
+
+*** Problemas con la gestión de claves y permisos
+
+[[./images/usuario-invalido.jpg]]
+
+
+
+
+* Qué se gana con la cultura Devops 
+
+*"Los equipos que practican DevOps despliegan 30 veces más frecuentemente, fallan 60 veces menos y se recuperan 160 veces más rápido. "*
+
+/— Informe del estado de DevOps en 2016 de Puppet Labs/

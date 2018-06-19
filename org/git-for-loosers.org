@@ -1,0 +1,141 @@
+#+TITLE: 
+#+AUTHOR: Patricio Martínez Cano
+#+DATE: \today
+#+LATEX_CLASS: article
+#+LATEX_CLASS_OPTIONS: [a4paper, oneside]
+#+LANGUAGE: es
+#+latex_header:\usepackage[spanish]{babel}
+#+latex_header:\textwidth=17cm
+#+latex_header:\oddsidemargin=0.5cm
+
+
+* Introducción a los controles de versiones
+
+Cuando estás editando, puedes "Guardar Como. . . " un archivo diferente, o copiar el archivo a otro lugar
+antes de guardar si quieres probar versiones viejas. También puedes usar compresión para ahorrar
+espacio. Esta es una forma primitiva y muy trabajosa de control de versiones. Los videojuegos han
+mejorado esto hace ya tiempo, muchas veces permitiendo guardar en varios slots, fechados
+automáticamente.
+Hagamos que el problema sea un poco más complejo. Imagina que tienes un montón de archivos que van
+juntos, como el código fuente de un proyecto, o archivos para un sitio web. Ahora, si quieres mantener
+una vieja versión, debes archivar un directorio completo. Tener muchar versiones a mano es
+inconveniente y rápidamente se vuelve costoso.
+
+* Introducción a Git
+
+Git (http://git.or.cz/) es la navaja suiza del control de versiones. Una herramienta de control de revisiones
+confiable, versátil y multipropósito, que por su extraordinaria flexibilidad es complicada de aprender, y
+más aún de dominar. Estoy documentando lo que he aprendido hasta ahora en estas páginas, porque
+inicialmente tuve dificultades para comprender el manual de usuario de Git
+(http://www.kernel.org/pub/software/scm/git/docs/user-manual.html).
+
+* Instalación 
+
+* Primeros pasos
+
+Ahora vamos a ver los primeros pasos usando un servidor público de una empresa privada como es el caso de *Github* 
+
+Para ello nos vamos a crear una cuenta en su página [[https://github.com/][web]]. 
+
+[[./images/github-web.png]]
+
+Una vez que nos hayamos hecho la cuenta creamos nuestro primer proyecto o repositorio.
+
+[[./images/primer-repositorio.png]]
+
+
+
+Una vez realizado lo *clonamos* a nuestro ordenador con la orden: 
+
+#+BEGIN_SRC sh 
+git clone 
+#+END_SRC
+
+Una vez que lo tenemos clonado en nuestro ordenador vamos a crear nuestro primer fichero con la orden: 
+
+#+BEGIN_SRC sh
+touch index.html
+#+END_SRC
+
+Y ahora por un lado añadiremos el fichero nuestro proyecto y por otro le haremos un *commit* 
+
+Un commit en un repositorio git registra un snapshot de todos los archivos en tu directorio. 
+
+Git pretende mantener los commits tan livianos como sea posible, por lo que no copia ciegamente el directorio completo cada vez que commiteás. Puede (cuando es posible) comprimir un commit como un conjunto de cambios (o un "delta") entre una versión de tu repositorio y la siguiente.
+
+Git mantiene, también, un historial de qué commits se hicieron cuándo. Es por eso que la mayoría de los commits tienen commits ancestros arriba suyo -- designamos esto con flechas en nuestra visualización.
+
+Así que haremos los siguientes comandos: 
+
+#+BEGIN_SRC sh
+git add . 
+git commit -m "Primer Commit"
+#+END_SRC
+
+Esto nos dará error la primera vez. Solo tenemos que leer el mensaje de error y realizar lo que nos pide. 
+
+Una vez hecho esto podemos volver a repetir el último comando y terminar por subir o sincronizar nuestro repositorio con la orden:
+
+#+BEGIN_SRC sh
+git push 
+#+END_SRC
+
+Introducimos nuestro nombre de usuario y nuestra contraseña y hecho. 
+
+* Ramas en Git 
+
+
+Las ramas *(branches)* en Git son increíblemente livianas. Son sólo referencias a un commit específico - nada más. Por esto es que tantos entusiastas de Git siguen el mantra:
+
+/brancheá temprano, y brancheá seguido/
+
+Como no hay consumo extra de almacenamiento ni memoria al hacer varias ramas, es más fácil dividir lógicamente tu trabajo que tener un par de ramas grandes.
+
+Vamos a crear una rama a nuestro proyecto que se llamará *bugFix*. Además navegaremos hasta esa rama para que los sucesimos commits se hagan en esa rama. 
+
+Para ello escribimos el siguiente comando: 
+
+#+BEGIN_SRC sh
+git branch bugFix
+git checkout bugFix
+#+END_SRC
+
+* Mergeando ramas 
+
+Ya sabemos cómo commitear y cómo crear ramas. Ahora tenemos que aprender algún modo de unificar el trabajo de dos ramas diferentes. Esto nos va a permitir abrir una nueva rama de desarrollo, implementar alguna nueva funcionalidad, y después unirla de nuevo con el trabajo principal.
+
+El primer método para combinarlas que vamos a explorar es git merge. Mergear en Git crea un commit especial que tiene dos padres diferentes. Un commit con dos padres escencialmente significa "Quiero incluir todo el trabajo de este padre de acá y este otro padre de acá, y del conjunto de todos sus ancestros"
+
+Para probarlo vamos a realizar los siguientes pasos:
+
+#+BEGIN_SRC sh
+git commit 
+git checkout master
+git commit
+git merge bugFix
+#+END_SRC
+
+* Git Rebase
+
+El segundo modo de combinar el trabajo de distintas ramas es el rebase. Rebasear escencialmente agarra un conjunto de commits, los "copia", y los aplica sobre algún otro lado.
+
+Aunque esto pueda sonar confuso, la ventaja de rebasear es que puede usarse para conseguir una secuencia de commits lineal, más bonita. El historial / log de commits del repositorio va a estar mucho más claro si sólo usás rebase.
+
+
+Nos gustaría mover nuestro trabajo de bugFix directamente sobre el trabajo de master. De ese modo, parecería que esas dos tareas se desarrollaron secuencialmente, cuando en realidad se hicieron en paralelo.
+
+Hagámoslo usando el comando:
+
+#+BEGIN_SRC sh
+git rebase master
+git rebase bugFix                                                                                                       
+#+END_SRC
+
+
+*No hacer rebase cuando trabajemos con proyectos de otros* 
+
+
+
+
+
+

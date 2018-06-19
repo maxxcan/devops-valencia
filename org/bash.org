@@ -1,0 +1,454 @@
+* Introducción
+  :PROPERTIES:
+  :CUSTOM_ID: introducción
+  :END:
+
+El modo texto es la forma más antigua y por lo tanto más potente para
+trabajar en entornos UNIX. La gran cantidad de comandos y la facilidad
+así como la potencia que nos ofrece este tipo de entornos de trabajo no
+tiene igual.\\
+Muchas personas relacionan el modo texto con una vuelta al pasado y por
+lo tanto un retraso ya que así era como se ha trabajado durante mucho
+tiempo, y por lo tanto lo consideran tosco y duro. De echo, no hay que
+olvidar que *los modos gráficos* se desarrollaron para hacer más
+compresible el mundo de la computación a las personas. Esto hace que
+para la gran mayoría trabajar en entornos basados en texto les resulta
+difícil y con dificultad para entender lo que están haciendo.\\
+Aún así, para una persona que ya tenga cierta experiencia en el mundo de
+los ordenadores, este entorno es el que mejor nos permite un control de
+nuestra computadora así como un conocimiento de lo que realmente ocurre
+en ella y cómo funciona y por lo tanto es el más recomendado.
+
+Aún así el modo texto nos brinda de algunas herramientas que normalmente
+relacionamos con los entornos gráficos.\\
+Ejemplo:
+
+telnet
+
+telnet> open (to) towel.blinkenlights.nl
+
+Otro ejemplo es el uso de navegadores en modo texto como:
+
+-  lynx
+
+-  links
+
+-  mail o mailx
+
+-  mutt
+
+El modo texto también puede ser divertido. Por ejemplo ejecutemos estos
+comandos:
+
+
+
+
+-  Luego podemos hacer apt-get install cowsay y hacer pruebas como uname
+   -r | cowsay
+
+-  uptime | cowsay -f /usr/share/cowsay/cows/bunny.cow
+
+-  uptime | cowsay -f /usr/share/cowsay/cows/dragon.cow
+
+-  uptime | cowsay -f /usr/share/cowsay/cows/tux.cow
+
+* Bash
+  :PROPERTIES:
+  :CUSTOM_ID: bash
+  :END:
+
+** Qué es un interprete de órdenes
+   :PROPERTIES:
+   :CUSTOM_ID: qué-es-un-interprete-de-órdenes
+   :END:
+
+Nos damos cuenta cuando estamos en el interprete de ordenes (shell en
+ingles) porque normalmente se despliega su símbolo de espera “$\$$” o
+“$\#$”, donde se puede ingresar comandos, que luego son ejecutados por
+el sistema.\\
+El interprete de ordenes es un programa que recibe nuestra orden
+(comando), realiza tareas como: reemplaza nombre de archivos y
+variables, redireccionamiento de entrada-salida, localiza el archivo
+ejecutable e inicia el programa. Esta ubicado entre el kernel y el
+usuario, atendiendo las ordenes que este ultimo ejecuta y ocultando la
+complejidad del kernel para ejecutarlas.
+
+** Comandos
+   :PROPERTIES:
+   :CUSTOM_ID: comandos
+   :END:
+
+La fórmula básica a la hora de introducir comandos es:\\
+*nombre del comando* -opciones archivo\\
+### Comandos largos
+
+veces el comando se torna tan largo que sobrepasa la longitud de la
+terminal, cuando esto sucede automáticamente continuamos escribiendo en
+la linea inferior, pero puede quedarnos entrecortado, y difícil de
+leer.\\
+El carácter de nueva linea es el que le dice al interprete donde
+finaliza el comando, este se indica pulsando la tecla ENTER, pero si
+ingresamos un carácter “ ” antes de pulsar ENTER, este pierde su
+significado y podemos seguir escribiendo el comando en la linea
+inferior.\\
+### Programas y procesos
+
+Durante el articulo se utiliza mucho los términos proceso y programa,
+por eso decidí aclarar brevemente sus significados Un programa es un
+archivo o conjunto de archivos que contienen código ejecutable y datos,
+el programa normalmente esta ubicado en un disco. Se denomina proceso a
+un programa en ejecución, normalmente esta ubicado en memoria. Puede
+suceder que el mismo programa se ejecute varias veces simultáneamente,
+produciendo varios procesos. Por ejemplo supongamos dos usuarios en un
+sistema Linux , user1 y user2, ambos están utilizando el programa ls,
+user1 esta listando sus archivos (ls /home/user1) y el user2 también (ls
+/home/user2). Ambos utilizan el mismo programa pero generan dos procesos
+distintos.\\
+### Ejecución de comandos background
+
+Existe una forma de indicarle al interprete de ordenes que no espere
+hasta que finalice el comando, para dejarnos ejecutar otros, esto se
+denomina ejecución de procesos en background y lo indicamos finalizando
+el comando con un '$\&$'.\\
+Para que un comando pase de estado activo a estado background usamos
+*bg* y para volver a pasarlo a primer plano usamos *fg*
+
+*** Ejecución de comandos largos
+    :PROPERTIES:
+    :CUSTOM_ID: ejecución-de-comandos-largos
+    :END:
+
+Supongamos que queremos ejecutar tres programas escribiendo solo una
+linea, estos se pueden ejecutar secuencialmente, ósea que el interprete
+espere que finalice el primero para ejecutar el segundo y asi
+sucesivamente, o podemos hacer que los tres programas se ejecuten
+simultáneamente (los 3 juntos).\\
+Para esto existen 3 caracteres especiales: el punto y coma (;) , el
+ampersand ($\&$) y el pipe (|).\\
+Veamos un ejemplo donde se ejecutan tres programas secuencialmente:
+
+ls -l ; who ; ps
+
+Para el caso de ejecutar programas simultáneamente, estos pueden
+ejecutarse cada uno independientemente del resultado de los otros o
+pueden estar interconectados entre ellos, ósea que la salida de un
+proceso puede ser utilizada por otro. El carácter “$\&$” es el utilizado
+para ejecutar procesos simultáneamente sin interconexiones.\\
+Ejemplo:\\
+sleep 5 $\&$ echo “pasaron 5 segundos” $\&$ ls -l
+
+** Comunicación entre procesos
+   :PROPERTIES:
+   :CUSTOM_ID: comunicación-entre-procesos
+   :END:
+
+Puede surgir la necesidad de que un proceso necesite los datos que
+entrega otro, ambos ejecutándose simultáneamente, esto podemos
+indicárselo al interprete mediante el pipe ( | ), de la siguiente
+manera:\\
+programa1 | programa2 | comando3\\
+Ejemplos:
+
+-  ls -l |more
+
+-  ls -l /etc | grep id | sort | more
+
+** Redireccionamiento de entrada-salida
+   :PROPERTIES:
+   :CUSTOM_ID: redireccionamiento-de-entrada-salida
+   :END:
+
+Un programa que escribe en pantalla, podemos hacer que su salida vaya a
+un archivo, o también un programa que lee de teclado, podemos hacer que
+lea desde un archivo, todo eso sin que se de cuenta que realmente esta
+leyendo o escribiendo a archivo. Estas tareas de redireccionamiento son
+realizadas por el interprete y se indican con los signos “>” o “<”. El
+signo “>” se utiliza para redireccionar la salida estandart de un
+comando a un archivo y el “<” para que un comando lea desde un archivo
+en vez de su entrada estandart (teclado).\\
+Ejemplos:\\
+ls -l >file.txt\\
+Otro caso:
+
+ls -l /dev/etc > file.txt ; ls -l / > file.txt. si hacemos esto se
+*sobreescribe*.\\
+Si queremos evitarlo:\\
+ls -l /dev/etc > file.txt ; ls -l / >> file.txt
+
+Otros ejemplos:
+
+-  sort < file.txt
+
+-  cat file.txt | sort
+
+** Variables
+   :PROPERTIES:
+   :CUSTOM_ID: variables
+   :END:
+
+Una variable es un lugar de memoria donde se almacena un dato para un
+uso posterior. El interprete tiene la capacidad de almacenar variables.
+
+Pasa asignar un valor a una variable se realiza precediendo el nombre de
+la variable con un signo igual y su valor, veamos un ejemplo:\\
+nombre=“paco”
+
+echo $\$$nombre
+
+Existen cuatro tipos de variables: variables definidas por el usuario,
+variables parámetros, variables especiales y variables de entorno.
+
+*** Variables definidas por el usuario
+    :PROPERTIES:
+    :CUSTOM_ID: variables-definidas-por-el-usuario
+    :END:
+
+Son el caso del ejemplo anterior, su nombre solo debe contener
+caracteres alfanuméricos y el guión bajo ( $\_$ ), excepto el primer
+carácter no debe ser un dígito (0 a 9).\\
+Ejemplos:
+
+#+BEGIN_EXAMPLE
+    $ NOMBRE=Pepe
+    $ EDAD=20
+    $ echo Hola $NOMBRE
+    Hola Pepe
+
+    $ NOMBRE2=$NOMBRE
+    $ echo $NOMBRE2
+    Pepe 
+#+END_EXAMPLE
+
+Se puede asignar valor a mas de una variable en una única linea:\\
+$ NOMBRE=Pepe EDAD=20 $ echo $NOMBRE tiene $EDAD Pepe tiene 20
+
+La asignación se realiza de izquierda a derecha.
+
+#+BEGIN_EXAMPLE
+    $ X=1 Y=$X
+    $ echo $Y
+    1
+#+END_EXAMPLE
+
+Para quitarle el valor a una variable podemos utilizar el comando
+*unset*.
+
+#+BEGIN_EXAMPLE
+    $ X=1
+    $ echo $X
+    1
+    $ unset X
+    $ echo X
+#+END_EXAMPLE
+
+Para asegurarse que el valor de una variable no sea modificado, se puede
+indicar como de solo lectura de la siguiente manera:\\
+
+#+BEGIN_EXAMPLE
+    $ readonly variable
+
+    Ejemplo:
+
+    $ X=1
+    $ readonly X
+    $ X=2
+    bash: X: readonly variable
+    $ echo $X
+    1
+#+END_EXAMPLE
+
+** Variables parámetros
+   :PROPERTIES:
+   :CUSTOM_ID: variables-parámetros
+   :END:
+
+Como vimos al principio del texto, cuando el interprete procesa un
+comando, la primer palabra es el nombre del ejecutable y las siguientes
+son argumentos.\\
+Cuando el ejecutable es un script para bash, los parámetros son pasados
+al script mediante las variables parámetros, el primer parámetro será la
+variable $$$1, el segundo $$$2 y asi hasta $$$9.\
+Los nombres de las variables son de 1 a 9, el signo “$$$” es para poder
+leer su valor.\\
+Veamos un ejemplo de un script en bash que visualiza los dos primeros
+parámetros pasados.\\
+Editamos un archivo llamado script y le agregamos lo siguiente:
+
+-  echo $$$1
+
+-  echo $$$2
+
+Lo hacemos ejecutable y lo probamos.
+
+*** Variables especiales
+    :PROPERTIES:
+    :CUSTOM_ID: variables-especiales
+    :END:
+
+Veamos como se llaman estas variables y que contienen:
+
+-  $\S$* Contiene todos los parámetros pasados al scritp, si le pasamos
+   mas de 9 parámetros estarán incluidas en esta variable.
+
+-  $\$$$\#$ Contiene el numero de parámetros pasados al script.
+
+-  $\$$? Contiene el estado de finalización del ultimo comando
+   ejecutado, el cual es cero si el comando finalizo exitosamente o 1 si
+   hubo algún error.
+
+-  $\$$$\$$ Contiene el PID del proceso actual.
+
+*** Variables de entorno
+    :PROPERTIES:
+    :CUSTOM_ID: variables-de-entorno
+    :END:
+
+-  *HOME* Esta variable se inicializa cuando se ejecuta el bash y
+   contiene el directorio home del usuario (/home/usuario) Por ejemplo
+   cuando al comando cd no le inidicamos el directorio, ósea hacemos
+   “cd”, este comando lee la variable de entorno HOME y realiza “cd
+   $\$$HOME”.
+
+-  *PATH* Cuando ejecutamos bash, lo primero que hace es ejecutar los
+   scripts /etc/profile, $\$$HOME/.bash$\_$profile y $\$$HOME/.profile,
+   durante la ejecución de estos, una de las tareas que realiza es
+   cargarle un valor a la variable PATH, la cual inidica los directorios
+   donde bash buscara los archivos ejecutables.
+
+   $\$$ echo $\$$PATH.
+
+   /usr/local/bin:/usr/bin:/bin:/usr/bin/X11:/usr/games
+
+-  *PS1* Se inicializa cuando se ejecuta bash y contiene el valor del
+   símbolo de espera (prompt) de bash, que normalmente es “$\$$” para un
+   usuario ordinario o “$\#$” para el superusuario.
+
+-  *PS2* Contiene el símbolo de espera del shell secundario ( shell
+   hijo), normalmente es “>”.
+
+** Sustitución de nombres de archivos, variables y comandos
+   :PROPERTIES:
+   :CUSTOM_ID: sustitución-de-nombres-de-archivos-variables-y-comandos
+   :END:
+
+El interprete de ordenes realiza varias sustituciones en la linea de
+comando antes de ejecutarla, estas pueden ser nombres de archivos,
+valores de variables o el resultado de la ejecución de un comando, en
+seguida veremos por separado estas tres tipos de sustituciones:\\
+### Sustitución de nombres de archivos
+
+Una vez ingresado el comando (cuando presionamos ENTER), el interprete
+busca los caracteres “*”, “?” y “[...]” en los parámetros del comando, y
+reemplaza esos parámetros por nombres de archivos que se encuentran en
+el directorio de trabajo si se cumplen ciertas reglas que se explicaran
+a continuación:\\
+1. *Asteriscos*\\
+Los parámetros que contengan “*” serán reemplazados por nombres de
+archivos donde en la posición que se encuentra el asterisco tengan
+cualquier cadena de caracteres.
+
+#+BEGIN_EXAMPLE
+    Ejemplo:\
+    [**ls t\* \*d \*d\***]{}
+
+    Los nombres de archivos que comienzan con punto (.) no son
+    utilizados en la sustitución, para que se produzca la sustitución
+    debemos incluir un punto al inicio, por ejemplo para visualizar
+    todos los archivos que comienzan con punto ejecutamos “ls .\*”. El
+    carácter \* puede ser reemplazado por cadenas que contengan un punto
+    (.), esto no era asi en el DOS, donde para listar todos los archivos
+    había que ejecutar “dir \*.\*”, en Linux ejecutando “dir \*” o “dir”
+    se visualizan todos los archivos excepto aquellos que comiencen con
+    un punto (.).\
+#+END_EXAMPLE
+
+2. *Interrogación*\\
+   Solo puede ser remplazado por un único carácter.\\
+   *ls documento??.txt*
+
+3. *Corchetes*\\
+   Los corchetes sustituyen a un único carácter al igual que el “?”,
+   excepto que dentro de los corchetes se indica que valores pueden ser
+   utilizados para la sustitución.\\
+   Ejemplo:\\
+   *ls documento[1-3].txt*
+
+*** Sustitución de Variables
+    :PROPERTIES:
+    :CUSTOM_ID: sustitución-de-variables
+    :END:
+
+En la linea de comando cuando el bash encuentra el signo “$\$$”, supone
+que lo siguiente es el nombre de una variable y sustituye su valor.
+
+Ejemplos:
+
+NOMBRE=Pepe echo Hola $\$$NOMBRE Hola Pepe
+
+ls $HOME/bin/ /bin$ pwd /home/pepe/bin
+
+*** Sustitución de comandos
+    :PROPERTIES:
+    :CUSTOM_ID: sustitución-de-comandos
+    :END:
+
+Es un forma de pasar el resultado de un comando en los parámetros de
+otro comando, esto se realiza encerrando el comando entre comillas
+invertidas (“).\\
+Ejemplos:\\
+Para saber la cantidad de usuarios en el sistema podemos utilizar el
+comando:
+
+who | wc -l
+
+who lista cada usuario en un linea y “wc -l” cuenta la cantidad de
+lineas.
+
+echo Hay ‘who | wc -l‘ usuarios utilizando el sistema. Hay x usuarios
+utilizando el sistema.
+
+** Anulación de significado de los metacaracteres
+   :PROPERTIES:
+   :CUSTOM_ID: anulación-de-significado-de-los-metacaracteres
+   :END:
+
+
+Vimos que bash recorre nuestro comando ingresado en busca de caracteres
+especiales o metacaracteres, luego interpreta sus significado y por
+ultimo pasa la orden al kernel para su ejecución. Existe la posibilidad
+de indicarle que no interprete los caracteres especiales, esto se puede
+realizar con los caracteres: barra invertida ($\\$), apóstrofos (”) y
+comillas (“”) para algunos metacaracteres.\\
+*Barra invertida ($\\$)*:\\
+No se interpreta el metacaracter que le sigue, ósea el programa recibe
+el metacaracter dentro de sus parámetros.
+
+Ejemplos:
+
+echo * documento1.txt documento2.txt documento3.txt documentoa.txt
+documentob.txt documentoc.txt documentoa1.txt documentob1.txt
+documentoc1.txt
+
+echo *
+
+echo $\$$HOME /home/ariel
+
+$\#$ echo $\$$HOME $\$$HOME
+
+$\#$ ls > archivo1.txt
+
+$\#$ ls $\\$> archivo2.txt ls: >: No such file or directory ls:
+archivo2.txt: No such file or directory
+
+$\#$echo $\\$
+
+apóstrofos (”):
+
+No se interpreta ningún metacaracter que se encuentre dentro de ellas.
+
+echo '$\$$*?<>' *?<>
+
+Comillas (“ ”):
+
+El shell interpretara dentro de las comillas los caracteres: $\$$, ‘..‘
+y los demás no son interpretados.

@@ -1,0 +1,30 @@
+#+TITLE: ejemplo-final
+#+AUTHOR: Patricio Martínez
+#+EMAIL: maxxcan@gmail.com
+
+
+* Y también podemos hacer esquemas
+
+#+BEGIN_SRC ditaa :file images/ejemplo.png :cmdline -E -s 2 -r
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#+END_SRC

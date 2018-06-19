@@ -1,0 +1,35 @@
+#+TITLE: Desarrollo Devops
+#+AUTHOR: Patricio Martínez
+#+EMAIL: maxxcan@argonauta
+#+DATE: <2018-06-14 jue>
+
+
+* Qué es un Devops 
+
+* Gestor de versiones y Git
+
+* Virtualización 
+
+* Docker y contenedores  
+
+* Conceptos básicos en administración de sistemas
+
+** Introducción 
+
+** Sistemas Operativos
+
+** Requerimientos en Hardware
+
+** GNU y Linux
+
+** Distribuciones GNU/Linux y otras
+
+* Entorno de texto
+
+** Consolas de texto
+
+** Línea de comandos y primeros comandos
+
+* Docker y Git avanzado
+
+* Programación literaria para Devops 

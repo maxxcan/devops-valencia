@@ -1,0 +1,28 @@
+#+TITLE: Demostración de programación literaria para Devops
+#+AUTHOR: Patricio Martínez
+#+EMAIL: maxxcan@gmail.com
+
+
+* Primer ejemplo sencillo
+
+Simplemente veremos como se ejecuta un comando:
+
+* Sigamos con algo más complejo
+
+Con este sencillo ejemplo exportaremos tanto código como los resultados.
+
+* Generando la documentación por un lado y el código por otro
+
+
+[[../img/tanglin.png]]
+
+
+* Ejecutando código en un servidor remoto
+
+Gracias a *Tramp* dentro de /Emacs/ podemos acceder a máquinas remotas.
+
+* Y muchos más formatos
+
++ Mandarlo directamente como modo texto para correo electrónico
++ En formato para wikis internas o externas
++ Otras herramientas de comunicación como Jira, Redmine, Slack, etc

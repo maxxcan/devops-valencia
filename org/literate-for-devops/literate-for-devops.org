@@ -1,0 +1,244 @@
+#+TITLE:Programación Literaria para Devops
+#+AUTHOR: Patricio Martínez
+#+EMAIL: maxxcan@gmail.com
+#+REVEAL_ROOT: file:/opt/reveal.js/
+#+OPTIONS: reveal_center:t reveal_progress:t reveal_history:nil reveal_control:t multiplex:t
+#+OPTIONS: reveal_rolling_links:t reveal_keyboard:t reveal_overview:t num:nil
+#+OPTIONS: reveal_width:1200 reveal_height:800
+#+OPTIONS: toc:1
+#+REVEAL_MARGIN: 0.1
+#+REVEAL_MIN_SCALE: 0.5
+#+REVEAL_MAX_SCALE: 2.5
+#+REVEAL_TRANS: cube
+#+REVEAL_THEME: league
+#+REVEAL_HLEVEL: 2
+
+
+ 
+* Introducción
+
+Esta es una charla muy corta. La más corta y floja de la temporada. 
+
+Esta charla viene de cuando nos reuniamos en la universidad por la tarde para tomar un café
+y hablar sobre conceptos, herramientas, ideas, etc. 
+
+** Café con Patricio
+:PROPERTIES:
+:reveal_background: ./img/cafe.gif
+:reveal_background_trans: slide
+:END: 
+
+Así que relajémonos y tomemos un café juntos mientras charlamos 
+
+** --- WARNING 
+:PROPERTIES: 
+:reveal_background: #ff0000
+:reveal_background_trans: zoom
+:END:
+
+
+Esto es muy *Novedoso*. 
+
+*Esto quiere decir que posiblemente en vuestras empresas o lo implementáis vosotros o nadie lo hará*
+
+* Qué es un Devops
+
+
+[[./img/devops.jpg]]
+
+
+#+reveal: split 
+
+Pero lo principal es saber que *Devops* no es un puesto es un *método* o *cultura*
+
+[[./img/metodo-devops.jpg]]
+
+
+#+reveal: split
+
+ _Algunas_ de sus fases de su trabajo:
+
+#+attr_reveal: :frag (appear)
++ Integración continua
++ Continuo desarrollo
++ Desarrollo Ágil
++ _Documentación y Comunicación__ <---
+
+
+
+
+
+* La documentación es muy importante
+
+[[./img/ordenador-troll.gif]]
+
+** Posibles problemas por no tener una documentación adecuada
+
+*** El trabajo del administrador se hace tedioso y confuso
+
+[[./img/admin-confuso.jpg]]
+
+
+*** Dificulta la resolución de problemas 
+
+-- Que siempre ocurren los viernes por la tarde
+
+[[./img/rogando.jpg]]
+
+
+*** Dificulta el trabajo a otras personas que vengan nuevas
+
+[[./img/newbie-sysadmin.png]]
+
+*** Problemas con la gestión de claves y permisos
+
+[[./img/usuario-invalido.jpg]]
+
+
+* Dos conceptos interesantes que importamos de la ciencia y la computación
+
+#+attr_reveal: :frag (appear)
++ Programación Literaria
++ Investigación reproducible
+
+** Qué es la programación literaria o letrada
+
+Es un estilo de programación propuesto por *Donald Knuth* para documentar los programas. 
+Este estilo de programación representa un movimiento disruptivo respeto a la escritura de
+programas en el orden y forma impuesto por el ordenador. En cambio permite a los programadores
+desarrollar sus programas en el orden fijado por la lógica y el flujo de sus pensamientos.
+
+#+reveal: split
+
+[[./img/donald-knuths.jpg]]
+
+Donald Knuths creador de *Latex*
+
+** Qué es la investigación reproducible
+
+La reproducibilidad ha sido una parte clave de la investigación científica y se ha
+denominado la *demarcación entre ciencia y nociencia*. /Cristopher Gandrud/
+
+La investigación reproducible requiere que los conjuntos de datos y el código computacional 
+estén disponibles para la verificación de los resultados publicados y la realización de análisis alternativos
+
+*** Ventajas para un Devops 
+
+#+attr_reveal: :frag (appear)
+- Mayor velocidad a la hora de repetir un proceso
+- Capacidad de analizar un proceso y mejorarlo
+- Mejora la documentación y la revisión de la misma
+- Mejora la comunicación entre devops o equipos
+
+* Programación literaria para Devops
+
+
+Posible definición:
+
+*La manera de escribir, explicar, documentar y ejecutar infraestructuras como código.*
+
+
+** Diferencia entre programación literaria y código con comentarios.
+
+[[./img/diferencias.png]]
+
+* Aplicaciones
+
+** Algunas programas
+
+Aunque aún no es muy popular este tipo de desarrollo cada vez hay más programas y extensiones para
+conocidos editores aunque están más enfocados a la programación literaria. 
+
+Algunos de estos son:
+
+#+attr_reveal: :frag (appear)
++ [[http://leoeditor.com/][Editor Leo]]
++ [[https://github.com/nteract/nteract][Editor nteract]]
++ [[http://lep.sourceforge.net/][Extensión para Eclipse]]
++ [[https://atom.io/packages/language-literate][Extensión para Atom]]
+
+** Emacs. El editor definitivo para Devops
+
+*Emacs es el editor extensible*
+
+[[./img/emacs.png]]
+
+[[https://www.gnu.org/software/emacs/][Su página web]]
+
+#+reveal: split
+
+#+attr_reveal: :frag (appear)
++ Puedes *modificar* cada aspecto del editor
++ Puedes añadirle todas la *funcionalidades* que quieras
++ Opera con *modos*. Cada modo le da un conjunto de nuevas funcionalidades.
+#+attr_reveal: :frag (appear) 
+  + Modos para programación en Python, C/C++, Java, TypeScript, etc.
+  + Modos para chatear, correo, navegador web, gestor de git e incluso un reproductor de música.
+  + Modos para generar gran cantidad de formatos de documentos en PDF, HTML, presentaciones, etc.
+
+#+reveal: split
+
+#+attr_reveal: :frag (appear)
++ Tiene una completa *integración* con el sistema operativo.
+  + Esto habilita la capacidad de *ejecutar comandos del sistema* y capturar su salida.
++ Además es más liviano que la mayoría de IDEs del mercado.
++ Gran cantidad de paquetes con los que la comunidad continuamente añade mejoras
++ Puede funcionar perfectamente en *modo texto*  
+** Org-mode 
+Un modo muy especial de Emacs.
+Es una perla dentro de Emacs. Mucha gente se ha pasado
+a Emacs sólo por este modo. 
+
+*Org mode* sirve para tomar notas, hacer listas de tareas, planificar proyectos, generar
+documentación, hacer presentaciones y charlas, etc, y todo en un efectivo sistema en _texto
+plano_
+#+reveal: split
+#+attr_reveal: :frag (appear)
++ Org-mode es así mismo muy extensible
++ Ayuda a organizar los documentos
++ Es un gran gestor de tareas
++ Los ficheros son muy livianos al ser texto plano
++ Puedes embeber código, tablas, imágenes, Latex etc, puede reemplazar a cualquier procesador de texto
++ Ejecuta código y muestra los resultados
++ Exporta a gran cantidad de formatos como PDF, HTML, ascii, etc.
++ También se integra con distinto software de gestión de procesos como [[https://es.atlassian.com/software/jira][Jira]], [[http://www.redmine.org/][Redmine]] y otros.
+* Demostración 
+* Para saber más 
+#+attr_reveal: :frag (appear)
++ [[http://www.howardism.org/][Howard Abrams]]
++ [[http://www-cs-faculty.stanford.edu/~uno/lp.html][Donald Knuth]]
++ [[https://staff.science.uva.nl/c.dominik/][Carsten Dominik]]
+
+
+** Webs 
+
+Buscar por /literate devops/
+
+Algunos ejemplos son:
+#+attr_reveal: :frag (appear)
++ [[http://www.howardism.org/Technical/Emacs/literate-devops.html][Artículo de Howard Abrams]]
++ [[http://www.howardism.org/Technical/Emacs/literate-database.html][Otro artículo para acceder a una base de datos]]
++ [[https://archive.fosdem.org/2016/schedule/event/literate_devops_for_configuration_management/][Charla en el FOSDEM del 2016]]
+
+#+reveal: split
+
+Finalmente hay mucha información en las planets de Emacs
+#+attr_reveal: :frag (appear)
++ [[http://planet.emacsen.org/][Planet de Emacs en inglés]]
++ [[http://planet.emacs-es.org/][Planet de Emacs en español]]
+
+** Vídeos
+
+#+attr_reveal: :frag (appear)
++ [[https://www.youtube.com/watch?v=dljNabciEGg][Vídeo de Howard Abrams]]
++ [[https://www.youtube.com/watch?v=vVJSn8gCh_I][Otro vídeo de Howard Abrams]]
++ Vídeo de Devops Murcia??
+
+
+* Gracias a todos
+
+Sólo a vosotros os puedo contar mis traumas. 
+
+Sois mejores que un psicólogo :-)
+
+

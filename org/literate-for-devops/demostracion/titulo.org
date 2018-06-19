@@ -1,0 +1,12 @@
+* Demostración de Programación Literaria para Devops
+
+
+
+                          Programación Literaria
+                                           en un
+                               Mundo de Comandos
+
+
+    
+****                                        —Patricio Martínez
+                                           @maxxcan
