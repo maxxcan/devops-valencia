@@ -5,13 +5,9 @@
 
 
 * Qué es un Devops 
-
 * Gestor de versiones y Git
-
 * Virtualización 
-
 * Docker y contenedores  
-
 * Conceptos básicos en administración de sistemas
 
 ** Introducción 
@@ -31,5 +27,4 @@
 ** Línea de comandos y primeros comandos
 
 * Docker y Git avanzado
-
 * Programación literaria para Devops 
