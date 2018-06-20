@@ -238,3 +238,6 @@ git stash apply
 
 *Puedes tener varios stashes, y manipularlos de varias maneras. Mira git help stash*
 
+* ¿Dónde Nos Equivocamos?
+
+
