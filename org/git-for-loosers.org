@@ -135,7 +135,106 @@ git rebase bugFix
 *No hacer rebase cuando trabajemos con proyectos de otros* 
 
 
+* Agrega, Elimina, Renombra
+
+Como ya hemos visto para añadir nuevos fichero ejecutamos la orden:
+
+#+BEGIN_SRC sh
+git add .
+#+END_SRC
+
+En cambio para que Git se *olvide* de ciertos ficheros porque (por ejemplo, los borrastes): 
+
+#+BEGIN_SRC sh
+git rm .
+#+END_SRC
+
+Renombrar un archivo es lo mismo que eliminar el nombre anterior y agregar el nuevo. También puedes
+usar git mv que tiene la misma sintaxis que el comando mv. Por ejemplo:
+
+#+BEGIN_SRC sh
+git mv archivo-nuevo archivo-viejo
+#+END_SRC
+
+* Deshacer/Rehacer Avanzado
+
+Algunas veces solo quieres ir hacia atrás y olvidarte de todos los cambios a partir de cierto punto, porque
+estaban todos mal. Entonces:
+
+#+BEGIN_SRC sh
+git log
+#+END_SRC
+
+Esto te muestra una lista de commits recientes, y sus hashes SHA1. A continuación, escribe:
+
+#+BEGIN_SRC shell
+git reset --hard SH1-HASH
+#+END_SRC
 
 
 
+Para recuperar el estado de un commit dado, y borrar para siempre cualquier recuerdo de commits más
+nuevos.
+
+Otras veces, quieres saltar a un estado anterior temporalmente. En ese caso escribe:
+
+#+BEGIN_SRC shell
+
+git checkout SHA1_HASH
+
+#+END_SRC
+
+En general, cuando te sientas inseguro del resultado de una operación, sea o no de Git, ejecuta
+
+#+BEGIN_SRC shell
+git commit -a
+#+END_SRC
+
+* Averiguar qué es lo que hemos hecho
+
+
+Averigua que cambios hiciste desde el último commit con:
+
+#+BEGIN_SRC shell
+git diff
+#+END_SRC
+
+O desde ayer:
+
+#+BEGIN_SRC shell
+git diff "@{yesterday}"
+#+END_SRC
+
+O entre una versión en particular y 2 versiones hacia atrás:
+
+#+BEGIN_SRC shell
+git diff SHA1_HASH "master~2"
+#+END_SRC
+
+
+
+* Branches Temporales
+
+Después de un rato puedes notar que estás creando branches de corta vida de manera frecuente por
+razones similares: cada branch sirve simplemente para salvar el estado actual y permitirte saltar a un
+estado anterior para solucionar un bug de alta prioridad o algo.
+
+
+Es análogo a cambiar el canal de la TV temporalmente, para ver que otra cosa están dando. Pero en lugar
+de apretar un par de botones, tienes que crear, hacer checkout y eliminar branches y commits temporales.
+Por suerte, Git tiene un aatajo que es tan conveniente como un control remoto de TV:
+
+#+BEGIN_SRC shell
+git stash
+#+END_SRC
+
+Esto guarda el estado actual en un lugar temporal (un stash) y restaura el estado anterior. Tu directorio de
+trabajo se ve idéntico a como estaba antes de que comenzaras a editar, y puedes solucionar bugs, traer
+cambios desde otros repositorios, etc. Cuando quieras volver a los cambios del stash, escribe:
+
+#+BEGIN_SRC shell
+git stash apply
+#+END_SRC
+
+*Puedes tener varios stashes, y manipularlos de varias maneras. Mira git help stash*
 

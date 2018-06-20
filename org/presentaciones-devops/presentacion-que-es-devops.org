@@ -90,8 +90,8 @@ Los grandes puntos u objetivos que persigue la metodología de trabajo DevOps po
 
 * Prácticas Devops 
 
-#+attr_reveal: :frag (appear)
 
+#+attr_reveal: :frag (appear)
 + *Principios DevOps*   Como debemos pensar diferentes sobre operaciones. Ejemplos incluyen la colaboración entre administradores y desarrolladores, “infraestructura como código”, etc.
 
 + *Métodos DevOps*  Procesos que se usan para realizar operaciones ágiles, como iteraciones, lean/kanban, reuniones de 5 minutos, etc.
@@ -138,3 +138,16 @@ Los grandes puntos u objetivos que persigue la metodología de trabajo DevOps po
 *"Los equipos que practican DevOps despliegan 30 veces más frecuentemente, fallan 60 veces menos y se recuperan 160 veces más rápido. "*
 
 /— Informe del estado de DevOps en 2016 de Puppet Labs/
+
+* Cuanto cobra un Devops 
+
+Esto es difícil de decir ya que es un rol *nuevo* y no siempre se valora. En todo caso como en cualquier trabajo lo
+mejor es ir a empresas que tengan claro lo que es un desarrollo ágil y tengan filosofía devops. 
+
+En todo caso según esta [[https://cursoswordpressmadrid.es/sueldos-informaticos/][página]] la media en España está sobre los *40.000* euros brutos anuales. 
+
++ *42.000* en Madrid
++ *44.000* en Barcelona
++ *36.000* en Valencia
+
+Además lo bueno es que muchas empresas admiten el trabajo *online* con lo que podemos acceder a ofertas de otros países. 

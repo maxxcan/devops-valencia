@@ -9,7 +9,6 @@
 * Gestor de versiones y Git
 
 * Virtualización 
-
 * Docker y contenedores  
 
 * Conceptos básicos en administración de sistemas
@@ -33,3 +32,4 @@
 * Docker y Git avanzado
 
 * Programación literaria para Devops 
+* Seguir con el proyecto
