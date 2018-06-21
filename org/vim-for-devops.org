@@ -1,0 +1,218 @@
+#+title: vim-for-devops
+#+author: Patricio Martínez
+#+email: patricio@argonauta
+
+* Introducción 
+
+Aunque hay muchos editores y decir que alguno es mejor o peor depende mucho de distintos factores como el uso que le vamos a dar, gustos, que tengan herramientas que necesitamos, etc, etc, hay un editor que al menos si eres devops o administrador de sistemas tienes que conocer ya que es muy probable que te topes con él para la administración de algún sistema. Ese editor todo terreno y ubicuo es *Vim*.
+
+** Vi o Vim 
+
+
+
+* Aprendiendo Vim 
+
+Existen algunas reglas básicas para los usuarios novatos de vim. Primero, ten un resumen de los comandos a mano y a todas horas. Segundo, consigue un buen libro que comprenda todos los aspectos de vim. 
+
+
+* ¿Cuál es la diferencia entre los modos Comando e Inserción?
+
+A menudo calificado como una de los principales problemas de vim, y calificado igualmente a menudo como uno de sus grandes fuertes, vim diferencia entre un *“modo comando” y un “modo inserción”*. 
+
+Entender esta diferencia es *VITAL*
+para aprender vim. Cuando uno llama a vim, él se inicia en modo comando. En este modo, uno se puede mover por el fichero, y *realizar comandos* para cambiar ciertas áreas del texto, cortar, copiar y pegar secciones del texto y muchas
+más cosas. El *modo inserción* es donde uno puede realmente insertar texto. En otras palabras, el modo comando se usa para moverse por el documento, y el modo inserción se usa para introducir texto en el documento.
+
+Comandos tales como: a, i, c, C, O, o y otros le pasarán a uno del modo inserción al modo comando.
+
+*<Escape> o ^C* le sacarán a uno del modo inserción para devolverle al modo comando. Familiarízate con esta distinción. Es una de las cosas que hacen a vi diferentes del resto de otros editores.
+
+* Salir sin salvar y salvando 
+
+Las teclas básicas para salir de un fichero que estemos editando son:
+
+- :q! Salir sin salvar 
+- :wq o :x Salir salvando 
+- :X salir guardando y cifrando 
+
+* Buscando texto 
+
+/<texto> buscará hacia delante. ?<texto> buscará hacia atrás. ?? o // repetirá la última búsqueda. Además, en
+vi, n buscará la siguiente ocurrente. N repetirá la última búsqueda pero cambiando el sentido de búsqueda. Las
+expresiones regulares pueden ser utilizadas dentro de las búsquedas.
+
+* Seleccionando texto 
+
+Con la tecla *v* pasaremos al *modo visual* y podremos seleccionar por *caracteres* 
+
+Con la tecla *V* seleccionaremos por *línea* 
+
+Con *Control + v* seleccionaremos por bloques
+
+Además de eso:
+
+- vi% todo lo que haya dentro de los paréntesis en los que estés al principio o al final
+- vib Seleccionaremos dentro de paréntesis si estamos dentro de ellos
+- vi' Seleccionaremos dentro de comillas simples
+- vi" Seleccionaremos dentro de comillas dobles
+- viB Seleccionaremos todo lo que esté dentro de llaves
+- ggVG Seleccionamos todo el texto
+
+* Copiando texto 
+
+Una vez seleccionado el texto pulsamos la tecla y *y* copiamos el texto.
+
+Una vez hecho esto ponemos el cursor en el lugar que queremos pegar el texto y pulsamos *p o P*  
+
+Si pulsamos dos veces *d* borramos la línea en donde esté situado el cursor.
+
+* He cometido un error, ¿cómo deshacer lo hecho?
+
+*u* deshará el último comando. *U* deshará los cambios de la línea actual. 
+:e! volverá a cargar el documento actual desde la última vez que se salvó sin salvar ningún cambio. 
+
+Además, el texto eliminado se almacena en los registros numerados desde 1 a 9. “<número>p restaurará la enésima cosa borrada. 
+
+Puedes buscar rápidamente en los registros probando uno, pulsando u si no es el que buscas y probando con el siguiente.
+
+
+
+
+
+* ¿Qué son los comandos “dos puntos”?
+
+Los comandos que siguen a los dos puntos (:), son comandos del *editor ex*. 
+Estos permiten mucha flexibilidad y potencia. Por ejemplo, existen muchas formas de buscar y remplazar, y todos ellos tienen algunas similitudes.
+
+* ¿Cómo buscas y sustituyes?
+
+ 
+Pero para buscar y sustituir a la vez lo más simple es:
+
+: s/viejo/nuevo/g 
+
+Pero esto solo actúa sobre la línea actual, así que para todo el texto:
+
+: %s/viejo/nueno/g
+
+Donde [rango] es cualquier rango, incluyendo números, $ (final de fichero), . (la posición o línea actual), % (fichero actual), o simplemente dos números con una barra entre ellos. (o incluso +5 para representar las siguientes
+cinco líneas). 
+
+[cgi] es cualquiera de las tres *c, g, i* o ninguna de ellas. *c* le dice a vim que te pregunte antes de realizar el cambio (confirm), *g* para que realice varias substituciones en una misma línea si se diese el caso, *i* para decirle a vi que
+*no haga distinciones entre mayúsculas y minúsculas en la búsqueda. Si no especificas ninguno de estos caracteres después de la barra final, solamente se cambiará la primera ocurrencia de cada línea.
+
+* ¿Cómo ejecuto un programa desde dentro de vim?
+
+
+:!cmd ejecutará el comando cmd. :sh ejecutará un shell interactivo. Dentro de este shell, podrías si quisieses, ejecutar vim de nuevo. 
+Esto es particularmente útil cuando estas editando makefiles y ficheros de configuración de programas en un intento de hacer que un programa compile. La ventaja sobre :e es que no necesitas salvar el fichero, y
+que estarás en el mismo sitio cuando salgas del shell (aconsejo salvar el fichero de todos modos …)
+
+* ¡Hubo un apagón mientras escribía con el vim!
+
+Normalmente el mismo programa te da un mensaje explicándolo sino, tecleando: 
+: vim –r <nombre_fichero> 
+
+Donde *<nombre_fichero>* es el nombre del fichero que estabas editando en el momento del apagón o caída del sistema. 
+
+*vim –r* te dará una lista de ficheros que pueden ser recuperados.
+
+* ¿Trucos para hacer más amigable la programación con vi?
+
+: :set ai 
+
+hará que vi realice la autoindentación por ti.
+
+: :set sw=# 
+
+donde # es un número que fijará el shiftwidth (ancho de tabulador).
+
+Puedes utilizar <<, >> para desplazar una línea “shifwidth” caracteres a la izquierda o a la derecha
+respectivamente. Además, puedes utilizar < % para desplazar un conjunto {, (, [ a la izquierda o > % para
+hacer el desplazamiento a la derecha. Debes estar en la parte superior del {, }, (, ), [ o ] específico del par
+para desplazarlos.
+
+: :set sm 
+mostrará el {, ( or [ correspondiente cuando escribes el }, ), ] que lo cierra. Es la mejor forma de
+que no se te quede un carácter de bloque {, (, [ sin su pareja.
+
+: :set lisp 
+realizará algunos cambios que son útiles para la programación en lisp. () se moverá hacia atrás
+y forth a través de las expresiones-s, y {} se moverá sin detenerse en los átomos.
+
+Esto es extensible a otros lenguajes de programación.
+
+: :syntax on 
+
+Que nos coloreará la sintaxis correspondiente al lenguaje de programación que estemos usando.
+
+* Macros 
+
+Una macro es un nombre de comando que representa un conjunto de operaciones. Las macros suelen ser utilizadas cuando se ejecutan una serie de comandos frecuentemente y siempre en el mismo orden.
+
+
+La forma más fácil es grabando al mismo tiempo que ejecutamos una serie de ordenes.
+
+Para grabar:
+
+: q + letra Empieza a grabar 
+: @ + letra Ejecuta la macro
+: @ + @ Ejecuta la última macro 
+: 5 + @ + letra Ejecuta la macro en la letra indicada 5 veces
+
+
+
+
+
+También podemos definir la macro en *modo comando* 
+
+- Macros en modo comando: :map [#] nombre_macro definición
+
+
+*nombre_macro* puede ser de hasta 10 caracteres (aunque es preferible que dicho nombre sea exclusivamente una letra) y la definición de hasta 100 caracteres. 
+
+Si se utilizan múltiples comandos en la definición, no es necesario que estén separados.
+
+Los nombres de las macros no deberían ser letras de vi que se utilicen en modo comando, como por ejemplo la “a” para añadir, la “o” para insertar líneas, …
+
+Vamos a ver dos ejemplos: 
+
+: :map <F2> :echo 'Current time is ' . strftime('%c')<CR>
+: :map! <F3> <C-R>=strftime('%c')<CR>
+
+Si queremos eliminar estas macros usamos el comando *unmap*
+
+: unmap <F3>
+
+
+Para más información recomiendo esta [[https://rchavarria.github.io/blog/2014/10/11/aprendiendo-vim/][página]] 
+
+* Abreviando texto 
+
+Tenemos el comando *ab* que nos permite hacer cualquier cosa. 
+
+Ejemplos:
+: ab email maxxcan@gmail.com
+: quijote en un lugar de la mancha de cuyo nombre no quiero acordarme
+
+Si solo escribimos :ab veremos todas las abreviaturas que tenemos.
+
+Para eliminar una abreviatura usamos el comando
+
+: :una email 
+
+Y para eliminar todas las abreviaturas 
+
+: abc 
+
+También podemos tener todas las abreviaturas en el fichero de configuración .vimrc que carga las configuraciones de Vim al principio o bien tenerlas
+en un fichero aparte que podremos cargar posteriormente con el comando:
+
+: :source <fichero>
+
+Lo mismo con las macros
+
+ 
+
+
+
