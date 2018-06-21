@@ -1,0 +1,515 @@
+#+title: bash-for-devops
+#+author: Patricio Martínez
+#+email: patricio@gmail.com
+
+
+* Introducción
+  :PROPERTIES:
+  :CUSTOM_ID: introducción
+  :END:
+
+El modo texto es la forma más antigua y por lo tanto más potente para
+trabajar en entornos UNIX. La gran cantidad de comandos y la facilidad
+así como la potencia que nos ofrece este tipo de entornos de trabajo no
+tiene igual.
+
+Muchas personas relacionan el modo texto con una vuelta al pasado y por
+lo tanto un retraso ya que así era como se ha trabajado durante mucho
+tiempo, y por lo tanto lo consideran tosco y duro. De echo, no hay que
+olvidar que *los modos gráficos* se desarrollaron para hacer más
+compresible el mundo de la computación a las personas. Esto hace que
+para la gran mayoría trabajar en entornos basados en texto les resulta
+difícil y con dificultad para entender lo que están haciendo.
+
+Aún así, para una persona que ya tenga cierta experiencia en el mundo de
+los ordenadores, este entorno es el que mejor nos permite un control de
+nuestra computadora así como un conocimiento de lo que realmente ocurre
+en ella y cómo funciona y por lo tanto es el más recomendado.
+
+Si podemos evitar el uso del ratón lo máximo posible ganaremos velocidad en la línea de comandos.
+Separar una mano del teclado es perder productividad.
+
+Obligarse a usar solamente el teclado durante semanas será suficiente para aprender la mayoría de los trucos que hacen que ganes en productividad.
+El ratón no es malo pero tampoco es bueno en la línea de comandos.
+
+Si eres capaz de hacer la prueba con el tiempo lo agradecerás
+
+Aún así el modo texto nos brinda de algunas herramientas que normalmente
+relacionamos con los entornos gráficos.
+Ejemplo:
+
+telnet
+
+telnet> open (to) towel.blinkenlights.nl
+
+Otro ejemplo es el uso de navegadores en modo texto como:
+
+-  lynx
+
+-  links
+
+-  mail o mailx
+
+-  mutt
+
+El modo texto también puede ser divertido. Por ejemplo ejecutemos estos
+comandos:
+
+
+
+
+-  Luego podemos hacer apt-get install cowsay y hacer pruebas como uname
+   -r | cowsay
+
+-  uptime | cowsay -f /usr/share/cowsay/cows/bunny.cow
+
+-  uptime | cowsay -f /usr/share/cowsay/cows/dragon.cow
+
+-  uptime | cowsay -f /usr/share/cowsay/cows/tux.cow
+
+* Interpretes de comandos
+  :PROPERTIES:
+  :CUSTOM_ID: bash
+  :END:
+
+** Qué es un interprete de órdenes
+   :PROPERTIES:
+   :CUSTOM_ID: qué-es-un-interprete-de-órdenes
+   :END:
+
+Nos damos cuenta cuando estamos en el interprete de ordenes (shell en
+ingles) porque normalmente se despliega su símbolo de espera “$” o
+“#”, donde se puede ingresar comandos, que luego son ejecutados por
+el sistema.
+
+El interprete de ordenes es un programa que recibe nuestra orden
+(comando), realiza tareas como: reemplaza nombre de archivos y
+variables, redireccionamiento de entrada-salida, localiza el archivo
+ejecutable e inicia el programa. Esta ubicado entre el kernel y el
+usuario, atendiendo las ordenes que este ultimo ejecuta y ocultando la
+complejidad del kernel para ejecutarlas.
+
+** Comandos
+   :PROPERTIES:
+   :CUSTOM_ID: comandos
+   :END:
+
+La fórmula básica a la hora de introducir comandos es:
+*nombre del comando* -opciones archivo
+
+** Programas y procesos
+
+Durante el articulo se utiliza mucho los términos proceso y programa,
+por eso decidí aclarar brevemente sus significados Un programa es un
+*archivo o conjunto de archivos* que contienen código ejecutable y datos,
+el programa normalmente esta ubicado en un disco. Se denomina proceso a
+un *programa en ejecución*, normalmente esta ubicado en memoria. Puede
+suceder que el mismo programa se ejecute varias veces simultáneamente,
+produciendo varios procesos. Por ejemplo supongamos dos usuarios en un
+sistema Linux , user1 y user2, ambos están utilizando el programa ls,
+user1 esta listando sus archivos (ls /home/user1) y el user2 también (ls
+/home/user2). Ambos utilizan el mismo programa pero generan dos procesos
+distintos.
+
+** Ejecución de comandos background
+
+Existe una forma de indicarle al interprete de ordenes que no espere
+hasta que finalice el comando, para dejarnos ejecutar otros, esto se
+denomina ejecución de procesos en background y lo indicamos finalizando
+el comando con un '&'.\\
+Para que un comando pase de estado activo a estado background usamos
+*bg* y para volver a pasarlo a primer plano usamos *fg*
+
+*** Ejecución de comandos largos
+    :PROPERTIES:
+    :CUSTOM_ID: ejecución-de-comandos-largos
+    :END:
+
+Supongamos que queremos ejecutar tres programas escribiendo solo una
+linea, estos se pueden ejecutar secuencialmente, ósea que el interprete
+espere que finalice el primero para ejecutar el segundo y asi
+sucesivamente, o podemos hacer que los tres programas se ejecuten
+simultáneamente (los 3 juntos).
+Para esto existen 3 caracteres especiales: el punto y coma (;) , el
+ampersand (&) y el pipe (|).
+Veamos un ejemplo donde se ejecutan tres programas secuencialmente:
+
+ls -l ; who ; ps
+
+Para el caso de ejecutar programas simultáneamente, estos pueden
+ejecutarse cada uno independientemente del resultado de los otros o
+pueden estar interconectados entre ellos, ósea que la salida de un
+proceso puede ser utilizada por otro. El carácter “&” es el utilizado
+para ejecutar procesos simultáneamente sin interconexiones.
+Ejemplo:
+
+#+begin_src shell
+sleep 5 & echo “pasaron 5 segundos” & ls -l
+#+end_src
+
+** Comunicación entre procesos
+   :PROPERTIES:
+   :CUSTOM_ID: comunicación-entre-procesos
+   :END:
+
+Puede surgir la necesidad de que un proceso necesite los datos que
+entrega otro, ambos ejecutándose simultáneamente, esto podemos
+indicárselo al interprete mediante el pipe ( | ), de la siguiente
+manera:
+programa1 | programa2 | comando3\\
+
+Ejemplos:
+
+#+BEGIN_SRC shell
+ls -l |more
+#+END_SRC
+
+#+BEGIN_SRC shell
+ls -l /etc | grep id | sort | more
+#+END_SRC
+
+
+** Redireccionamiento de entrada-salida
+   :PROPERTIES:
+   :CUSTOM_ID: redireccionamiento-de-entrada-salida
+   :END:
+
+Un programa que escribe en pantalla, podemos hacer que su salida vaya a
+un archivo, o también un programa que lee de teclado, podemos hacer que
+lea desde un archivo, todo eso sin que se de cuenta que realmente esta
+leyendo o escribiendo a archivo. Estas tareas de redireccionamiento son
+realizadas por el interprete y se indican con los signos “>” o “<”. El
+signo “>” se utiliza para redireccionar la salida estandart de un
+comando a un archivo y el “<” para que un comando lea desde un archivo
+en vez de su entrada estandart (teclado).
+
+Ejemplos:
+
+#+BEGIN_SRC shell
+ls -l > file.txt
+#+END_SRC
+
+
+Otro caso:
+
+#+BEGIN_SRC shell
+ls -l /dev/etc > file.txt ; ls -l / > file.txt 
+#+END_SRC
+
+si hacemos esto se *sobreescribe*.
+
+Si queremos evitarlo:
+
+#+BEGIN_SRC shell
+ls -l /dev/etc > file.txt ; ls -l / >> file.txt
+#+END_SRC
+
+
+
+Otros ejemplos:
+
+#+BEGIN_SRC shell
+sort < file.txt
+#+END_SRC
+
+#+BEGIN_SRC shell
+cat file.txt | sort
+#+END_SRC
+
+* Bash a la velocidad de la luz
+
+
+
+** Moverse entre directorios 
+
+** Borrar la pantalla 
+
+
+Puedes borrar la pantalla usando /clear/ o mucho más rápido con la combinación de teclas *Control+l*.
+Esto es uno de esos atajos que hacen ganar mucho tiempo a quienes usan bastante el borrado de pantalla.
+Funcionará también en la consola de mysql.
+
+
+
+
+
+** Repetir el último comando
+
+ Repetir el último comando escrito es sencillo.
+ Podemos hacer esto usando la tecla de "arriba" de los cursores no obstante podemos hacer esto también escribiendo lo siguiente:
+
+ #+BEGIN_SRC shell
+ !!
+ #+END_SRC
+
+ Si por ejemplo nuestro último comando era un ls eso repetirá ese último comando.
+ En algunos entornos es de gran utilidad.
+
+
+** Repetir un último comando con sus argumentos
+
+ Es posible que nos interese repetir la última vez que utilizamos un determinado comando.
+ Es posible que nos interese simplemente llamar al comando y que los argumentos que le pasamos en su momento se pasen de nuevo sin que tengamos que escribirlos.
+
+ Veamos un ejemplo:
+
+ #+BEGIN_SRC shell
+ !ls
+ #+END_SRC
+
+ Si nuestro último comando ejecutando ls era así: ls -la entonces repetirá eso mismo.
+ Así con cualquier comando. Esto es de utilidad si por ejemplo solemos usar determinados comandos con bastantes argumentos y queremos llamarlos rápidamente sin tener que escribirlos de nuevo. 
+ Otro ejemplo:
+
+ #+BEGIN_SRC shell
+ !ps
+ #+END_SRC
+
+ Eso ejecutará el último comando ps que hemos escrito con sus argumentos.
+
+Otra cosa buena es repetir solamente una parte del comando, por ejemplo este:
+
+#+BEGIN_SRC shell
+hola mundo mundial
+#+END_SRC
+
+Escribiendo *!:2* repetirá solamente mundo que esta en la segunda posición.
+
+* Ver los últimos argumentos
+
+Esto es con *ESC+.* (Escape + punto). Es maravilloso.
+
+* Arreglar y repetir el último comando
+
+Algunas veces la gente se confunde. Somos humanos y esas cosas.
+Por ejemplo cuando vas a realizar un echo "hola mundo" así:
+
+#+BEGIN_SRC shell
+eco "hola mundo"
+#+END_SRC
+
+Eso dará error salvo que tengamos en el sistema algún programa llamado eco.
+Para arreglarlo y que se ejecute de nuevo podemos hacerlo así:
+
+#+BEGIN_SRC shell
+^eco^echo^
+#+END_SRC
+
+Ahora tendremos la salida de hola mundo. Esto lo cierto es que no tiene mucho sentido en líneas cortas pero si puede ser de utilidad en un momento dado para cambiar una cadena del último comando por otra y que se repita. 
+Veamos otro ejemplo:
+
+#+BEGIN_SRC shell
+ping -c 1 google.com
+#+END_SRC
+
+Eso realizará un ping a google.com transmitiendo solamente un paquete. Si deseamos realizar el ping a otro host podemos hacerlo así:
+
+#+BEGIN_SRC shell                                                  
+^google.com^duckduckgo.com^                                               
+#+END_SRC    
+
+Eso cambiará la cadena google.com por duckduckgo.com y relanzará el ping pero esta vez hacia ese nuevo host.
+Como ves esto sirve para apañar un error en algún comando o para cambiar algún valor de algún comando que hemos realizado previamente.
+
+* Auto-completado
+
+Esta es un clásico que cuando ves que alguien no lo utiliza te tiras de los pelos.
+*La tecla tabulador para autocompletar* mientras trabajas en la línea de comandos es crema buena.
+Si por ejemplo quieres entrar a /etc/apache2/ puedes hacer esto:
+
+- Escribes /cd/ metes un espacio y escribes la letra /e/
+- Presionas tabulador 2 veces si hace falta. Si todo va bien te auto-completará /etc/
+- Sigues escribiendo, en este caso solamente /apa/ y pulsas tabulador para que auto-complete.
+
+*Con esto se ahorra escribir mucho.* Si existen varias opciones nos las mostrará.
+Mucha gente utiliza esto para rápidamente ver si existen varios archivos con nombres que empiezan igual.
+
+* Moverse por el historial
+
+Moverse por el historial podemos hacerlo con las flechas de arriba y abajo.
+Es muy sencillo y no tiene mucho misterio.
+
+* Buscar en el historial
+
+Con la combinación de teclas *Control+r* rápidamente podemos hacer una búsqueda en el historial y dar con lo que queremos.
+Esto es crema de la buena y hace que ganemos muchísimo tiempo a la hora de trabajar y que no tengamos que recordar miles de opciones en comandos largos y específicos para tareas determinadas.
+
+* Historial con fecha
+
+Es importante muchas veces saber cuando se ejecutó un determinado comando.
+Para que esto pase podemos añadir en el .bashrc de un usuario lo siguiente:
+
+#+BEGIN_SRC shell
+export HISTTIMEFORMAT="%h/%d - %H:%M:%S "
+#+END_SRC
+
+Abrimos una sesión de bash nueva (escribiendo *bash*) y miramos el historial escribiendo *history*.
+Ahora ya veremos la fecha de cuando ejecutamos las cosas.
+
+* Alterar el historial
+
+Alterar el historial es buena cosa. Nos puede interesar para por ejemplo apañar un comando que no pusimos bien y que es largo.
+Para esto se puede usar el comando *fc*.
+
+#+BEGIN_SRC shell
+fc
+#+END_SRC
+
+Ejecutando solamente *fc* entraremos en el editor que tengamos configurado por defecto (vi,nano,emacs, ...) y podremos editar la última orden que hemos mandado a la línea de comandos.
+
+#+BEGIN_SRC shell
+fc -l
+#+END_SRC
+
+Esto es buena cosa. Veremos que nos muestra un número de los últimos 10 comandos.
+Si queremos editar uno determinado usaremos esto:
+
+#+BEGIN_SRC shell
+fc 44
+#+END_SRC
+
+Una vez editado si buscamos en el historial este estará alterado y reflejará los nuevos cambios.
+Editando el archivo .bash_history de nuestro usuario también podemos hacer lo mismo (aunque mola menos).
+
+Otra forma es anteponer el símbolo *!* antes del número del comando que aparece cuando escribimos 
+
+#+BEGIN_SRC shell
+history
+#+END_SRC
+
+* Los alias 
+
+Crear un alias de un comando largo es buena cosa. Esto nos permitirá ser más rápidos a la hora de trabajar.
+Para probar un alias podemos hacerlo así:
+
+#+BEGIN_SRC shell
+alias hola='ls -la'
+#+END_SRC
+
+No ser guardará para la siguiente sesión pero si queremos que se graben podemos hacerlo en el archivo .bashrc
+
+* Desactivar un alias temporalmente
+
+Es posible que no queramos usar un alias en un momento dato.
+Supongamos que tenemos este alias para usar links2:
+
+#+BEGIN_SRC shell
+ alias links2="links -g"
+#+END_SRC
+
+Cuando escribimos links2 siempre nos abre el modo "gráfico" de este navegador.
+Si no lo queremos en un momento dado lo ejecutaremos así:
+
+#+BEGIN_SRC shell
+\links2 www.maxxcan.com
+#+END_SRC
+
+Ejecutará links2 sin la opción -g añadida en el alias.
+
+* Cerrar sesión
+
+Cerrar la sesión escribiendo exit es cansino. Puedes hacerlo con *Control+d* e ir saltando de maquina en maquina.
+Es una maravilla y nunca más usarás exit para salir salvo que sea necesario.
+
+* Algunas combinaciones para editar texto
+
+Es buena cosa en la línea de comandos movernos cuando estamos escribiendo algunos comandos largos.
+Una opción es ir con los cursores dándole a la tecla izquierda o derecha para moverse, el caso es que eso es lento.
+
+Pongamos de ejemplo que estamos escribiendo este comando y queremos ir al inicio ya que nos hemos confundido y en vez de *cp* queremos usar *mv*:
+
+#+BEGIN_SRC shell
+ cp archivo1.txt /var/www/mierda/
+#+END_SRC
+
+Usaremos *control+a* para irnos al principio de la línea y cambiar el comando cp por mv.
+Para ir al final de la línea podemos usar *control+e*.
+
+*TRUCO DEL ALMENDRUCO*: Para recordar que letra es para ir /al principio/ o a /el final/ hemos de recordarlo tal que así:
+
+- Control+a - a de /alprincipio/
+- Control+e - e de /elfinal/
+
+
+
+Si quieres moverte rápido puedes pulsar control a la vez que le das a las flechas izquierda o derecha e irás saltando de palabra en palabra.
+
+Otra cosa buena es para los que sufren en mayor o menor grado *disortografía* o quienes se confunden de vez en cuando.
+
+Un ejemplo:
+
+#+BEGIN_SRC shell
+sl /var/www/*
+#+END_SRC
+
+Nuestra intención era usar el comando /ls/ pero por error pusimos /sl/. Esto se arregla colocándonos en medio de la /s/ y la /l/ y pulsando *Control+t*.
+Veremos como se cambia de posición la l por la s y la s por la l.
+
+Algunos otros:
+
+- Cortar hasta el principio desde nuestra posición - Control + u
+- Cortar hasta el final desde nuestra posición - Control + k
+- Pegar - Control + y
+- Ir al principio de la línea - Ctrl + a
+- Ir al final de la línea - Ctrl + e
+
+Copiar y pegar con el botón del medio del ratón.
+
+Esto es simplemente seleccionar con el clic izquierdo y te vas a otro lado y pegas con el botón del medio del ratón.
+
+* Expansión con llaves
+
+La vida con corchetes es mejor dicen las malas lenguas.
+Pongamos un ejemplo usando corchetes:
+
+#+BEGIN_SRC shell
+ echo archivo{1,2,3,4,5,6,7,8}
+#+END_SRC
+
+Eso mostrará una salida así: archivo1 archivo2 archivo3 ...
+
+Si en vez de echo usamos el comando touch podemos crear todos esos archivos así:
+
+#+BEGIN_SRC shell
+ touch archivo{1,2,3}
+#+END_SRC
+
+Eso generará 3 archivos vacíos llamados: archivo1 archivo2 archivo3
+Si quisiéramos añadirle una extensión al crearlos podríamos hacerlo así.
+
+#+BEGIN_SRC shell
+ touch archivo{1,2,3}.txt
+#+END_SRC
+
+Eso generaría los 3 archivos sin nada dentro pero con la extensión /.txt/
+
+Para copiar por ejemplo un archivo de forma rápida lo que podemos hacer es esto:
+
+#+BEGIN_SRC shell
+ cp hola.txt{,.bk}
+#+END_SRC
+
+Eso copiará hola.txt como hola.txt.bk y se escribe menos que usando el comando normal:
+
+#+BEGIN_SRC shell
+ cp hola.txt hola.txt.bk
+#+END_SRC
+
+Ahora podemos probar algo más molón creando 14 archivos de prueba:
+
+#+BEGIN_SRC shell
+ touch imagen{1,2,3,4,5,6,7,8,9,10,11,12,13,14}.jpg
+#+END_SRC
+
+Y solamente queremos realizar algo contra la imagen5 hasta la imagen10.
+Por ejemplo ver información sobre que tipo de archivo es:
+
+#+BEGIN_SRC shell
+file imagen{5..10}.jpg
+du -ha imagen{5..10}.jpg
+#+END_SRC
+
+Si nos fijamos estamos usando *..* para indicar un rango.
+
+
+

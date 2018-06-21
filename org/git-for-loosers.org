@@ -134,7 +134,6 @@ git rebase bugFix
 
 *No hacer rebase cuando trabajemos con proyectos de otros* 
 
-
 * Agrega, Elimina, Renombra
 
 Como ya hemos visto para añadir nuevos fichero ejecutamos la orden:
@@ -212,7 +211,6 @@ git diff SHA1_HASH "master~2"
 #+END_SRC
 
 
-
 * Branches Temporales
 
 Después de un rato puedes notar que estás creando branches de corta vida de manera frecuente por
@@ -238,6 +236,36 @@ git stash apply
 
 *Puedes tener varios stashes, y manipularlos de varias maneras. Mira git help stash*
 
+* Me corrijo 
+
+Si queremos cambiar el commit que hemos acabado de escribir usamos el comando:
+
+#+BEGIN_SRC shell
+git commit --amend
+#+END_SRC
+
 * ¿Dónde Nos Equivocamos?
 
+Si hemos descubierto una prestación rota en tu programa, y estás seguro que hace unos pocos meses
+funcionaba. 
 
+Git puede señalar la ubicación del problema con los siguientes comandos:
+
+#+BEGIN_SRC shell
+git bisect start
+git bisect bad SHA1_DE_LA_VERSION_MALA
+git bisect good SHA1_DE_LA_VERSION_BUENA
+#+END_SRC
+
+
+* ¿Quién se equivocó?
+
+Como muchos otros sistemas de control de versiones, Git tiene un comando blame:
+
+#+BEGIN_SRC shell
+git blame ARCHIVO
+#+END_SRC
+
+que anota cada línea en el archivo dado mostrando quién fue el último en cambiarlo y cuando. A
+diferencia de muchos otros sistemas de control de versiones, esta operación trabaja desconectada,
+leyendo solo del disco local.

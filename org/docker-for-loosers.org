@@ -45,13 +45,6 @@ Ejemplo de instalar un busybox
 docker pull busybox
 #+end_src 
 
-#+RESULTS:
-#+BEGIN_SRC sh
-Using default tag: latest
-latest: Pulling from library/busybox
-Digest: sha256:141c253bc4c3fd0a201d32dc1f493bcf3fff003b6df416dea4f41046e0f37d47
-Status: Image is up to date for busybox:latest
-#+END_SRC
 
 
 Usamos sudo por temas de servicio pero lo ideal es crear un grupo y añadir nuestro usuario a ese grupo.
@@ -129,9 +122,6 @@ haremos que nuestra terminal no se quede anclada ejecutando el contenedor. Esto 
 docker run -d -P --name static-site prakhar1989/static-file
 #+end_src
 
-#+RESULTS:
-#+BEGIN_SRC sh
-#+END_SRC
 
 La opción -d hace el desanclaje de nuesta terminal, -P public todos los puertos de forma aleatoria y finalmente --name le da un nombre
 a nuestro contenedor. Ahora podremos ver los puertos con la siguiente orden:

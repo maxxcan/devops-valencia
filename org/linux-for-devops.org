@@ -1,0 +1,70 @@
+#+TITLE: linux-for-devops
+#+AUTHOR: Patricio Martínez
+#+EMAIL: patricio@gmail.com
+
+* Introducción 
+
+** Por qué explicar Linux
+
+- Por razones históricas
+- Porque a día de hoy es el so más importante para desarrollo y sistemas 
+- Linux está en todas partes
+- Herencia de tecnología como los *gestores de paquetes* 
+- Cultura tecnológica. Es como no saber que son las redes sociales
+
+* Motivos por los que no usar Linux para desarrollo y sistemas 
+
+- Sistemas antiguos 
+- Se depende de herramientas exclusivas para otros sistemas. *Dependencia tecnológica* 
+
+
+* Hablemos de libertad 
+
+Podemos hablar de: 
+
+1) La Libertad como usuarios  
+
+2) La independencia de la tecnología que favorece la competencia
+
+3) Obsolescencia programada
+
+Si Linux no fuera *Software Libre* le hubiera pasado lo mismo que a Beos o a OS/2
+
+* Qué es el Software Libre 
+
+*4 Libertades*
+
+_presentación del pasado_
+
+
+* Software Libre vs Open Source
+
+Distintas licencias que son compatibles con la GPL pero no siempre cumplen las 4 libertades.
+
+Cuidado con ellas si vas a participar en el proyecto. 
+
+Como usuario puede que no importe tanto.
+
+* GNU y Linux
+
+Diferencias y parecidos
+
+* Distribuciones GNU/Linux y distribuciones no-GNU/Linux 
+
+
+** Distribuciones GNU/Linux 
+
+[[https://distrowatch.com/][Distrowatch]]
+
+* Distribuciones no-GNU/Linux 
+
+* Distribuciones GNU/no-Linux
+
+1) BSD
+2) Haiku
+3) ReactOS
+4) ...
+
+* Consola de texto 
+
+*La navaja suiza para los devops* 

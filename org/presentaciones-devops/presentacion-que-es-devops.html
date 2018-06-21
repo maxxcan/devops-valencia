@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Qué es un Devops</title>
+<meta name="author" content="(Patricio Martínez)"/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="file:/opt/reveal.js/css/reveal.css"/>
+
+<link rel="stylesheet" href="file:/opt/reveal.js/css/theme/league.css" id="theme"/>
+
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'file:/opt/reveal.js/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1 class="title">Qué es un Devops</h1><h2 class="author">Patricio Martínez</h2><p class="date">Created: 2018-06-20 mié 16:20</p>
+</section>
+<section id="table-of-contents">
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#/slide-orgedca774">Introducción</a></li>
+<li><a href="#/slide-org8c21334">Qué es un Devops</a></li>
+<li><a href="#/slide-orgdedcf97">Prácticas Devops</a></li>
+<li><a href="#/slide-org428a9f7">Las herramientas del Devops</a></li>
+<li><a href="#/slide-org2cad15f">La documentación es muy importante</a></li>
+<li><a href="#/slide-orgafd010f">Qué se gana con la cultura Devops</a></li>
+<li><a href="#/slide-orge41e647">Cuanto cobra un Devops</a></li>
+</ul>
+</div>
+</div>
+</section>
+
+
+
+<section>
+<section id="slide-orgedca774">
+<h2 id="orgedca774">Introducción</h2>
+<p>
+Ahora tomemos un descanso de unos días.
+</p>
+
+<p>
+Esta charla viene de cuando nos reuniamos en la universidad por la tarde para tomar un café
+y hablar sobre conceptos, herramientas, ideas, etc. 
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-org9460793" data-background="./images/cafe.gif" data-background-transition="slide">
+<h3 id="org9460793">Café con Patricio</h3>
+<p>
+Así que relajémonos y tomemos un café juntos mientras charlamos 
+</p>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org8c21334">
+<h2 id="org8c21334">Qué es un Devops</h2>
+<p>
+DevOps es un término relativamente nuevo para describir lo que también ha sido llamado como <b>“administración ágil de sistemas”</b> y también el trabajo y colaboración en conjunto de los equipos de operaciones y de desarrollo.
+</p>
+
+<p>
+Puedes pensar en DevOps como la participación efectiva de los administradores de sistemas en el proceso de desarrollo de aplicaciones, utilizando las mismas <b>técnicas ágiles</b> que usan los desarrolladores.
+</p>
+
+</section>
+<section >
+
+<p>
+DevOps significa un montón de cosas diferentes para diferentes personas porque el “desarrollo ágil” en si mismo cubre un terreno bastante amplio. 
+</p>
+
+<p>
+Algunas personas dirán que DevOps 
+es “ <b>la colaboración de los departamentos de desarrollo y operaciones</b> ”, o que es “ <b>tratar tu código como infraestructura</b> ”, o “ <b>usar automatización</b> ”.
+similares que se relacionan de una u otra forma.
+</p>
+
+</section>
+<section >
+
+
+
+<div class="figure">
+<p><img src="./images/devops.jpg" alt="devops.jpg" />
+</p>
+</div>
+
+
+</section>
+<section >
+
+<p>
+Pero lo principal es saber que <b>Devops</b> no es un puesto es un <b>método</b> o <b>cultura</b>
+</p>
+
+
+<div class="figure">
+<p><img src="./images/metodo-devops.jpg" alt="metodo-devops.jpg" />
+</p>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-orgb3e86e1">
+<h3 id="orgb3e86e1">Puntos resumen sobre qué es DevOps</h3>
+<p>
+Los grandes puntos u objetivos que persigue la metodología de trabajo DevOps podría resumirse en los siguientes puntos:
+</p>
+
+<ul>
+<li class="fragment appear"><b>Tiene como objetivo en cerrar una brecha entre el personal de operaciones y desarrollo</b> mediante la mejorar de la comunicación, la colaboración y la integración.</li>
+
+<li class="fragment appear"><b>Mejorar y optimización de los procesos</b> de puesta en marcha de un software.</li>
+
+<li class="fragment appear"><b>Permitir una mayor agilidad y excelencia operativa</b> para responder a una exigencia en la calidad y la rapidez de entrega.</li>
+
+<li class="fragment appear"><b>Simplificar los procesos de despliegue</b> de software e implementación sin renunciar a la efectividad y competitividad de una empresa.</li>
+
+</ul>
+
+</section>
+<section >
+
+
+<div class="figure">
+<p><img src="./images/dev-ops.jpg" alt="dev-ops.jpg" />
+</p>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-orge790711">
+<h3 id="orge790711">Algunas de sus fases de su trabajo:</h3>
+<ul>
+<li class="fragment appear">Integración continua</li>
+<li class="fragment appear">Continuo desarrollo</li>
+<li class="fragment appear">Desarrollo Ágil</li>
+<li class="fragment appear">Documentación y Comunicación</li>
+
+</ul>
+
+</section>
+<section >
+
+
+<div class="figure">
+<p><img src="./images/procesos-en-DevOps.png" alt="procesos-en-DevOps.png" />
+</p>
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-orgdedcf97">
+<h2 id="orgdedcf97">Prácticas Devops</h2>
+<ul>
+<li class="fragment appear"><b>Principios DevOps</b>   Como debemos pensar diferentes sobre operaciones. Ejemplos incluyen la colaboración entre administradores y desarrolladores, “infraestructura como código”, etc.</li>
+
+<li class="fragment appear"><b>Métodos DevOps</b>  Procesos que se usan para realizar operaciones ágiles, como iteraciones, lean/kanban, reuniones de 5 minutos, etc.</li>
+
+<li class="fragment appear"><b>Prácticas DevOps</b>  Técnicas y herramientas específicas usadas como parte de la implementación de los procesos, como herramientas de automatización (Puppet, Cheft), continuous deployment, sistemas de monitoreo (Nagios, Zabbix), y cualquier aplicación que tengas en tu “caja de herramientas”.</li>
+
+</ul>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org428a9f7">
+<h2 id="org428a9f7">Las herramientas del Devops</h2>
+
+<div class="figure">
+<p><img src="./images/devops-tools.png" alt="devops-tools.png" />
+</p>
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org2cad15f">
+<h2 id="org2cad15f">La documentación es muy importante</h2>
+
+<div class="figure">
+<p><img src="./images/ordenador-troll.gif" alt="ordenador-troll.gif" />
+</p>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org3fbea26">
+<h3 id="org3fbea26">Posibles problemas por no tener una documentación adecuada</h3>
+<div class="outline-text-3" id="text-org3fbea26">
+</div>
+</section>
+<section id="slide-org7b91c9e">
+<h4 id="org7b91c9e">El trabajo del administrador se hace tedioso y confuso</h4>
+
+<div class="figure">
+<p><img src="./images/admin-confuso.jpg" alt="admin-confuso.jpg" />
+</p>
+</div>
+
+
+</section>
+<section id="slide-org74c301d">
+<h4 id="org74c301d">Dificulta la resolución de problemas</h4>
+<p>
+&#x2013; Que siempre ocurren los viernes por la tarde
+</p>
+
+
+<div class="figure">
+<p><img src="./images/rogando.jpg" alt="rogando.jpg" />
+</p>
+</div>
+
+
+</section>
+<section id="slide-org718cd83">
+<h4 id="org718cd83">Dificulta el trabajo a otras personas que vengan nuevas</h4>
+
+<div class="figure">
+<p><img src="./images/newbie-sysadmin.png" alt="newbie-sysadmin.png" />
+</p>
+</div>
+
+</section>
+<section id="slide-orge1bd966">
+<h4 id="orge1bd966">Problemas con la gestión de claves y permisos</h4>
+
+<div class="figure">
+<p><img src="./images/usuario-invalido.jpg" alt="usuario-invalido.jpg" />
+</p>
+</div>
+
+
+
+
+</section>
+</section>
+<section>
+<section id="slide-orgafd010f">
+<h2 id="orgafd010f">Qué se gana con la cultura Devops</h2>
+<p>
+<b>"Los equipos que practican DevOps despliegan 30 veces más frecuentemente, fallan 60 veces menos y se recuperan 160 veces más rápido. "</b>
+</p>
+
+<p>
+<i>— Informe del estado de DevOps en 2016 de Puppet Labs</i>
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-orge41e647">
+<h2 id="orge41e647">Cuanto cobra un Devops</h2>
+<p>
+Esto es difícil de decir ya que es un rol <b>nuevo</b> y no siempre se valora. En todo caso como en cualquier trabajo lo
+mejor es ir a empresas que tengan claro lo que es un desarrollo ágil y tengan filosofía devops. 
+</p>
+
+<p>
+En todo caso según esta <a href="https://cursoswordpressmadrid.es/sueldos-informaticos/">página</a> la media en España está sobre los <b>40.000</b> euros brutos anuales. 
+</p>
+
+<ul>
+<li><b>42.000</b> en Madrid</li>
+<li><b>44.000</b> en Barcelona</li>
+<li><b>36.000</b> en Valencia</li>
+
+</ul>
+
+<p>
+Además lo bueno es que muchas empresas admiten el trabajo <b>online</b> con lo que podemos acceder a ofertas de otros países. 
+</p>
+</section>
+</section>
+</div>
+</div>
+<script src="file:/opt/reveal.js/lib/js/head.min.js"></script>
+<script src="file:/opt/reveal.js/js/reveal.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: false,
+center: true,
+slideNumber: 'c',
+rollingLinks: true,
+keyboard: true,
+overview: true,
+width: 1200,
+height: 800,
+margin: 0.10,
+minScale: 0.50,
+maxScale: 2.50,
+
+theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+transition: Reveal.getQueryHash().transition || 'cube', // default/cube/page/concave/zoom/linear/fade/none
+transitionSpeed: 'default',
+multiplex: {
+    secret: '', // null if client
+    id: '', // id, obtained from socket.io server
+    url: '' // Location of socket.io server
+},
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+ { src: 'file:/opt/reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+ { src: 'file:/opt/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'file:/opt/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'file:/opt/reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: 'file:/opt/reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }]
+});
+</script>
+</body>
+</html>

@@ -63,9 +63,9 @@ comandos:
    :END:
 
 Nos damos cuenta cuando estamos en el interprete de ordenes (shell en
-ingles) porque normalmente se despliega su símbolo de espera “$\$$” o
-“$\#$”, donde se puede ingresar comandos, que luego son ejecutados por
-el sistema.\\
+ingles) porque normalmente se despliega su símbolo de espera “$” o
+“#”, donde se puede ingresar comandos, que luego son ejecutados por
+el sistema.
 El interprete de ordenes es un programa que recibe nuestra orden
 (comando), realiza tareas como: reemplaza nombre de archivos y
 variables, redireccionamiento de entrada-salida, localiza el archivo
@@ -78,38 +78,29 @@ complejidad del kernel para ejecutarlas.
    :CUSTOM_ID: comandos
    :END:
 
-La fórmula básica a la hora de introducir comandos es:\\
-*nombre del comando* -opciones archivo\\
-### Comandos largos
+La fórmula básica a la hora de introducir comandos es:
+*nombre del comando* -opciones archivo
 
-veces el comando se torna tan largo que sobrepasa la longitud de la
-terminal, cuando esto sucede automáticamente continuamos escribiendo en
-la linea inferior, pero puede quedarnos entrecortado, y difícil de
-leer.\\
-El carácter de nueva linea es el que le dice al interprete donde
-finaliza el comando, este se indica pulsando la tecla ENTER, pero si
-ingresamos un carácter “ ” antes de pulsar ENTER, este pierde su
-significado y podemos seguir escribiendo el comando en la linea
-inferior.\\
-### Programas y procesos
+** Programas y procesos
 
 Durante el articulo se utiliza mucho los términos proceso y programa,
 por eso decidí aclarar brevemente sus significados Un programa es un
-archivo o conjunto de archivos que contienen código ejecutable y datos,
+*archivo o conjunto de archivos* que contienen código ejecutable y datos,
 el programa normalmente esta ubicado en un disco. Se denomina proceso a
-un programa en ejecución, normalmente esta ubicado en memoria. Puede
+un *programa en ejecución*, normalmente esta ubicado en memoria. Puede
 suceder que el mismo programa se ejecute varias veces simultáneamente,
 produciendo varios procesos. Por ejemplo supongamos dos usuarios en un
 sistema Linux , user1 y user2, ambos están utilizando el programa ls,
 user1 esta listando sus archivos (ls /home/user1) y el user2 también (ls
 /home/user2). Ambos utilizan el mismo programa pero generan dos procesos
-distintos.\\
-### Ejecución de comandos background
+distintos.
+
+** Ejecución de comandos background
 
 Existe una forma de indicarle al interprete de ordenes que no espere
 hasta que finalice el comando, para dejarnos ejecutar otros, esto se
 denomina ejecución de procesos en background y lo indicamos finalizando
-el comando con un '$\&$'.\\
+el comando con un '&'.\\
 Para que un comando pase de estado activo a estado background usamos
 *bg* y para volver a pasarlo a primer plano usamos *fg*
 
@@ -122,9 +113,9 @@ Supongamos que queremos ejecutar tres programas escribiendo solo una
 linea, estos se pueden ejecutar secuencialmente, ósea que el interprete
 espere que finalice el primero para ejecutar el segundo y asi
 sucesivamente, o podemos hacer que los tres programas se ejecuten
-simultáneamente (los 3 juntos).\\
+simultáneamente (los 3 juntos).
 Para esto existen 3 caracteres especiales: el punto y coma (;) , el
-ampersand ($\&$) y el pipe (|).\\
+ampersand (&) y el pipe (|).
 Veamos un ejemplo donde se ejecutan tres programas secuencialmente:
 
 ls -l ; who ; ps
@@ -132,10 +123,13 @@ ls -l ; who ; ps
 Para el caso de ejecutar programas simultáneamente, estos pueden
 ejecutarse cada uno independientemente del resultado de los otros o
 pueden estar interconectados entre ellos, ósea que la salida de un
-proceso puede ser utilizada por otro. El carácter “$\&$” es el utilizado
-para ejecutar procesos simultáneamente sin interconexiones.\\
-Ejemplo:\\
-sleep 5 $\&$ echo “pasaron 5 segundos” $\&$ ls -l
+proceso puede ser utilizada por otro. El carácter “&” es el utilizado
+para ejecutar procesos simultáneamente sin interconexiones.
+Ejemplo:
+
+#+begin_src shell
+sleep 5 & echo “pasaron 5 segundos” & ls -l
+#+end_src
 
 ** Comunicación entre procesos
    :PROPERTIES:
@@ -145,13 +139,20 @@ sleep 5 $\&$ echo “pasaron 5 segundos” $\&$ ls -l
 Puede surgir la necesidad de que un proceso necesite los datos que
 entrega otro, ambos ejecutándose simultáneamente, esto podemos
 indicárselo al interprete mediante el pipe ( | ), de la siguiente
-manera:\\
+manera:
 programa1 | programa2 | comando3\\
+
 Ejemplos:
 
--  ls -l |more
+#+BEGIN_SRC shell
+ls -l |more
+#+END_SRC
 
--  ls -l /etc | grep id | sort | more
+#+BEGIN_SRC shell
+ls -l /etc | grep id | sort | more
+#+END_SRC
+
+
 
 ** Redireccionamiento de entrada-salida
    :PROPERTIES:
@@ -165,21 +166,42 @@ leyendo o escribiendo a archivo. Estas tareas de redireccionamiento son
 realizadas por el interprete y se indican con los signos “>” o “<”. El
 signo “>” se utiliza para redireccionar la salida estandart de un
 comando a un archivo y el “<” para que un comando lea desde un archivo
-en vez de su entrada estandart (teclado).\\
-Ejemplos:\\
-ls -l >file.txt\\
+en vez de su entrada estandart (teclado).
+
+Ejemplos:
+
+#+BEGIN_SRC shell
+ls -l > file.txt
+#+END_SRC
+
+
 Otro caso:
 
-ls -l /dev/etc > file.txt ; ls -l / > file.txt. si hacemos esto se
-*sobreescribe*.\\
-Si queremos evitarlo:\\
+#+BEGIN_SRC shell
+ls -l /dev/etc > file.txt ; ls -l / > file.txt 
+#+END_SRC
+
+si hacemos esto se *sobreescribe*.
+
+Si queremos evitarlo:
+
+#+BEGIN_SRC shell
 ls -l /dev/etc > file.txt ; ls -l / >> file.txt
+#+END_SRC
+
+
 
 Otros ejemplos:
 
--  sort < file.txt
+#+BEGIN_SRC shell
+sort < file.txt
+#+END_SRC
 
--  cat file.txt | sort
+#+BEGIN_SRC shell
+cat file.txt | sort
+#+END_SRC
+
+
 
 ** Variables
    :PROPERTIES:
@@ -190,10 +212,14 @@ Una variable es un lugar de memoria donde se almacena un dato para un
 uso posterior. El interprete tiene la capacidad de almacenar variables.
 
 Pasa asignar un valor a una variable se realiza precediendo el nombre de
-la variable con un signo igual y su valor, veamos un ejemplo:\\
+la variable con un signo igual y su valor, veamos un ejemplo:
+
+#+BEGIN_SRC shell
 nombre=“paco”
 
-echo $\$$nombre
+echo $nombre
+#+END_SRC
+
 
 Existen cuatro tipos de variables: variables definidas por el usuario,
 variables parámetros, variables especiales y variables de entorno.
@@ -451,4 +477,5 @@ echo '$\$$*?<>' *?<>
 Comillas (“ ”):
 
 El shell interpretara dentro de las comillas los caracteres: $\$$, ‘..‘
+
 y los demás no son interpretados.
