@@ -78,7 +78,6 @@ Puedes buscar rápidamente en los registros probando uno, pulsando u si no es el
 
 
 
-
 * ¿Qué son los comandos “dos puntos”?
 
 Los comandos que siguen a los dos puntos (:), son comandos del *editor ex*. 

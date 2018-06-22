@@ -19,7 +19,6 @@ En resumen:
 
 [[./images/docker.png]]
 
-
 * Instalar docker
 
 En ArchLinux haremos 
@@ -45,34 +44,60 @@ Ejemplo de instalar un busybox
 docker pull busybox
 #+end_src 
 
+#+RESULTS:
+#+BEGIN_SRC sh
+Using default tag: latest
+latest: Pulling from library/busybox
+07a152489297: Pulling fs layer
+07a152489297: Download complete
+07a152489297: Pull complete
+Digest: sha256:141c253bc4c3fd0a201d32dc1f493bcf3fff003b6df416dea4f41046e0f37d47
+Status: Downloaded newer image for busybox:latest
+#+END_SRC
+
 
 
 Usamos sudo por temas de servicio pero lo ideal es crear un grupo y añadir nuestro usuario a ese grupo.
 
-#+begin_src sh
+#+begin_src sh :exports code :results code :tangle yes
 sudo groupadd docker
 sudo usermod -aG docker $USER
 #+end_src
 
 ** Ejecutando docker
 
-#+BEGIN_SRC sh 
+#+BEGIN_SRC  sh :exports code :results code :tangle yes
 docker run busybox
+#+END_SRC
+
+#+RESULTS:
+#+BEGIN_SRC sh
 #+END_SRC
 
 Nuestro docker está ahora funcionando
 
 Para verlo ejecutamos:
 
-#+begin_src sh
+#+begin_src sh :exports code :results code :tangle yes
 docker ps
 #+end_src
 
+#+RESULTS:
+#+BEGIN_SRC sh
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+#+END_SRC
+
 No aparece nada porque no está corriendo así que ejecutamos
 
-#+begin_src sh
+#+begin_src sh :exports code :results code :tangle yes
 docker ps -a
 #+end_src
+
+#+RESULTS:
+#+BEGIN_SRC sh
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                     PORTS               NAMES
+281f7341e2b2        busybox             "sh"                9 seconds ago       Exited (0) 7 seconds ago                       hopeful_dubinsky
+#+END_SRC
 
 Ahora vamos a ejecutar
 
@@ -93,8 +118,12 @@ docker rm ID del contenedor
 
 Para facilitar esto podemos borrar los contenedores de los cuales su estado sea /exited/ 
 
+#+begin_src sh :exports code :results code :tangle yes
+docker rm $(docker ps -a -q -f status=exited)
+#+END_SRC
+
+#+RESULTS:
 #+BEGIN_SRC sh
-docker rmi $(docker ps -a -q -f status=exited)
 #+END_SRC
 
 

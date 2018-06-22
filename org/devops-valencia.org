@@ -8,7 +8,7 @@
 * Gestor de versiones y Git
 * Virtualización 
 * Docker y contenedores  
-* Conceptos básicos en administración de sistemas
+   * Conceptos básicos en administración de sistemas
 
 ** Introducción 
 

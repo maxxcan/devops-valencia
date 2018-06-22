@@ -512,4 +512,4 @@ du -ha imagen{5..10}.jpg
 Si nos fijamos estamos usando *..* para indicar un rango.
 
 
-
+* Más allá de bash 
