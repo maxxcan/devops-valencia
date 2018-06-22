@@ -165,3 +165,118 @@ También podemos especificar los puertos con:
 docker run -p 8888:80 prakhar1989/static-site
 #+end_src 
 
+* Viendo otro ejemplo con sonar
+
+
+Vamos a instalar la imagen oficial de [[https://www.sonarqube.org/][sonarqube]]. 
+
+Para ellos podemos hacer un 
+
+#+BEGIN_SRC shell
+docker search sonarqube
+#+END_SRC
+
+y posteriormente un:
+
+#+BEGIN_SRC shell
+docker pull sonarqube 
+#+END_SRC
+
+Podemos comprobar que la imagen se ha bajado con *docker images* y la levantaremos con:
+
+#+BEGIN_SRC shell
+docker run -d --name sonarqube -p 9000:9000 sonarqube
+#+END_SRC
+
+Este comando lo que realiza es levantar un contenedor con los siguientes parámetros: 
+
++ d : Levanta el contenedor en segundo plano
++ name : Nombre asociado al contenedor
++ p: Mapeamos el puerto 9000 de nuestro equipo con el 9000 del contenedor
+
+Para acceder al sonar instalado en el contenedor nos bastaría con abrir un al navegador con la URL http:/localhost:9000, pero al usar un Mac (o Windows) y necesitar de un software intermedio, boot2docker, necesitaremos conocer la ip de la máquina virtual que crea boot2docker con el comando
+
+*boot2docker ip*
+
+Para parar el contenedor ejecutamos la orden:
+
+#+BEGIN_SRC shell
+docker stop sonarqube
+#+END_SRC
+
+Para borrar el contenedor ejecutamos la orden:
+
+#+BEGIN_SRC shell
+docker rm sonarqube
+#+END_SRC
+
+Hay que tener en cuenta que al borrar un contenedor perderíamos los cambios que hubiésemos realizado en él. Una de las opciones que tendríamos si queremos que los cambios que realicemos al contenedor sean permanentes, sería la de generar una imagen a partir del contenedor, para ello haríamos lo siguiente: 
+
+: docker commit -m "<comentario>" -a "<autor>" <id_contenedor> <nombre_imagen>:<etiqueta_imagen>  
+
+#+BEGIN_SRC shell
+docker commit -m "Nueva imagen" -a "maxxcan" sonarqube2 maxxcan/sonar
+#+END_SRC
+
+* Dockerfile  
+
+
+En este último apartado vamos a ver como crear una nueva imagen a través de un fichero llamado Dockerfile. 
+
+Un fichero Dockerfile es simplemente un fichero de texto que nos permite definir las instrucciones a seguir por Docker para construir una imagen, en otras palabras es como una receta para crear nuestras imágenes, que servirán de forma posterior para correr nuestros contenedores. 
+
+En este ejemplo vamos a crear una imagen con un SO Ubuntu y le vamos a instalar el servidor web Apache, para ello contamos con un Dockerfile: 
+
+#+BEGIN_SRC 
+ FROM ubuntu  
+ MAINTAINER Jorge Pacheco  
+ ENV http_proxy http://user:pass@proxy/  
+ ENV https_proxy http://user:pass@proxy/  
+ RUN apt-get update  
+ RUN apt-get install apache2 -y  
+ RUN echo "<h1>Apache with Docker</h1>" > /var/www/html/index.html  
+ EXPOSE 80  
+ ENTRYPOINT apache2ctl -D FOREGROUND 
+#+END_SRC
+
+Vamos a describir los comandos del Dockerfile:
+
+- FROM : Indica la imagen que tomamos como base, en este caso la imagen oficial de ubuntu
+- MAINTAINER: Especifica el autor de la imagen.
+- ENV: Definimos una variables de entorno en la imagen base.
+
+  - http_proxy http://user:pass@proxy/ — Definimos la variable http_proxy
+  - https_proxy http://user:pass@proxy/ — Definimos la variable https_proxy
+
+- RUN: Ejecuta una sentencia sobre la imagen base 
+
+  - apt-get update : actualiza los repositorios de ubuntu
+  - apt-get install apache2 -y : Instala el apache
+  - echo “<h1>Apache with Docker</h1>” > /var/www/html/index.html : crea un fichero index.html
+
+- EXPOSE: Exponemos el puerto 80 del contenedor para que pueda ser mapeado por la máquina anfitrión.
+- ENTRYPOINT: Indicamos que se ejecute apache2ctl -D FOREGROUND cada vez que arranquemos el contenedor.
+
+Una vez tengamos definido el fichero Dockerfile, vamos a construir la imagen:
+
+#+BEGIN_SRC shell
+docker build -t docker/apache
+#+END_SRC
+
+Le estamos indicando a docker que construya una imagen con el nombre docker/apache a partir del DockerFile que se encuentra en la misma ruta donde ejecutamos el comando.
+
+Si quisiesemos añadir algún fichero de configuración como por ejemplo *httpd.conf* tenemos que añadir la siguiente línea al Dockerfile:
+
+: ADD httpd.conf /etc/apache2 
+
+Y el fichero a copiar tiene que estar en la misma ruta que *Dockerfile* 
+
+Ya estamos en disposición de arrancar un contenedor a partir de la imagen que hemos creado: 
+
+#+BEGIN_SRC shell
+docker run --name apache1 -d -p 90:80 docker/apache  
+#+END_SRC
+
+Arrancamos un contenedor, que llamaremos apache1, mapeando el puerto 80 del contenedor con el 90 de nuestra máquina, a partir de la imagen jpacheco/apache. Para comprobar que todo ha ido bien
+abrimos un navegador con la url adecuada en el puerto 90 
+
